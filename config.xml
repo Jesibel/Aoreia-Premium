@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+ xmlns:gap   = "http://phonegap.com/ns/1.0"
+ id          = "com.aoreia.test"
+ versionCode = "12" 
+ version     = "1.0.0" >
+
+  <!-- versionCode is optional and Android only -->
+
+  <name>Aoreia Mobile</name>
+
+  <description>
+  An example for phonegap build docs. 
+  </description> 
+
+  <author href="http://aoreiamobile.aoreia.com" email="jesibelaranguren@gmail.com">
+  Hardeep Shoker 
+  </author>
+  
+   <feature name="http://api.phonegap.com/1.0/network"/>
+   <feature name="http://api.phonegap.com/1.0/media"/>
+   <feature name="http://api.phonegap.com/1.0/file"/>
+   <feature name="http://api.phonegap.com/1.0/notification"/>
+ 
+  <content src="index.html" />
+
+  <!-- Preferences -->
+
+  <preference name="orientation" value="default" />
+  <preference name="show-splash-screen-spinner" value="false" />
+  <preference name="android-minSdkVersion" value="14" />       <!-- JB 4.0 -->
+
+  
+
+  <preference name="SplashScreen" value="splash" />
+  <preference name="SplashScreenDelay" value="10000" /> <!-- ios: if set to false, the spinner won't appear on the splash screen during app loading -->
+  
+  <!-- only ios -->
+  <preference name="target-device"              value="universal" />      <!-- ios: possible values handset, tablet, or universal -->
+  <preference name="prerendered-icon"           value="true" />           <!-- ios: if icon is prerendered, iOS will not apply it's gloss to the app's icon on the user's home screen -->
+  <preference name="detect-data-types"          value="true" />           <!-- ios: controls whether data types (such as phone no. and dates) are automatically turned into links by the system -->
+  <preference name="exit-on-suspend"            value="false" />          <!-- ios: if set to true, app will terminate when home button is pressed -->
+  <preference name="AutoHideSplashScreen"       value="false" />
+  <preference name="FadeSplashScreen"           value="true" />
+  <preference name="FadeSplashScreenDuration"   value="0.5" />
+  <preference name="ShowSplashScreenSpinner"    value="false" />
+  
+  <preference name="stay-in-webview" value="true" /> 
+ 
+  <!-- Define app icon for each platform. -->
+  <icon src="resources/image/icon.png" />
+  <icon src="resources/image/logo36.png"   gap:platform="android"    gap:density="ldpi" />
+  <icon src="resources/image/logo48.png"   gap:platform="android"    gap:density="mdpi" />
+  <icon src="resources/image/logo72.png"   gap:platform="android"    gap:density="hdpi" />
+  <icon src="resources/image/logo96.png"   gap:platform="android"    gap:density="xhdpi" />
+  
+
+  <gap:splash src="resources/image/logo_aoreia_320V.png"     gap:platform="android" gap:qualifier="port-ldpi" />
+  <gap:splash src="resources/image/logo_aoreia_320V.png"  	gap:platform="android" gap:qualifier="port-mdpi" />
+  <gap:splash src="resources/image/logo_aoreia_480V.png"     gap:platform="android" gap:qualifier="port-hdpi" />
+  <gap:splash src="resources/image/logo-aoreia_720V.png"  gap:platform="android" gap:qualifier="port-xhdpi" />
+  
+  <gap:splash src="resources/image/logo_aoreia_320H.png"  gap:platform="android" gap:qualifier="land-ldpi" />
+  <gap:splash src="resources/image/logo_aoreia_320H.png"  gap:platform="android" gap:qualifier="land-mdpi" />
+  <gap:splash src="resources/image/logo_aoreia_480H.png"  gap:platform="android" gap:qualifier="land-hdpi" />
+  <gap:splash src="resources/image/logo_aoreia_720H.png" gap:platform="android" gap:qualifier="land-xhdpi" />
+    
+  <gap:splash src="resources/image/logo_aoreia_480.png"    gap:platform="ios"     width="320" height="480" />
+  <gap:splash src="resources/image/logo_aoreia_960.png"    gap:platform="ios"     width="640" height="960" />
+  <gap:splash src="resources/image/logo_aoreia_1024.png"   gap:platform="ios"     width="768" height="1024" />
+  <gap:splash src="resources/image/logo_aoreia_1024-2.png" gap:platform="ios"     width="1024" height="768" />
+
+
+  <gap:plugin name="org.apache.cordova.media" />	
+
+  <gap:plugin name="com.boyvanderlaak.cordova.plugin.orientationchanger" version="0.1.1" />
+  
+  <gap:plugin name="org.apache.cordova.inappbrowser" version="0.2.4" />
+  
+  <gap:plugin name="io.github.pwlin.cordova.plugins.fileopener" version="1.0.1" />
+  
+  <gap:plugin name="org.apache.cordova.dialogs" version="0.2.6" />
+  
+  <gap:plugin name="org.apache.cordova.splashscreen" />
+  
+  <!-- only ios -->
+  <gap:config-file platform="ios" parent="UISupportedInterfaceOrientations~ipad" overwrite="true">
+    <array>
+      <string>UIInterfaceOrientationLandscapeLeft</string>
+      <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+  </gap:config-file>
+
+  <access origin="http://aoreiamobile.aoreia.com" />       
+  <access origin="http://aoreiamobile.aoreia.com" subdomains="true" /> 
+  <access origin="*"/>
+  
+  
+
+</widget>

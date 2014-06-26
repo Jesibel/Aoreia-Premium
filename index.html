@@ -1,0 +1,2735 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2" /-->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes"/> 
+    <title>AOREIA MOBILE</title>
+    <meta charset="utf-8">
+	
+    <!--link href="http://aoreiamobile.aoreia.com/resources/css/style.css" rel="stylesheet" type="text/css" /> 
+	<!--link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+	<!--script>document.location='http://test.aoreia.com';</script-->
+	<link href="http://aoreiamobile.aoreia.com/resources/css/style.css" rel="stylesheet" type="text/css" />
+	<link href="http://aoreiamobile.aoreia.com/resources/css/index.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="http://aoreiamobile.aoreia.com/includes/js/lib/jqueryMobile/jquery.mobile-1.4.2.min.css" type="text/css" media="screen">
+	<script type="text/javascript" src="http://aoreiamobile.aoreia.com/includes/js/lib/jqueryMobile/demos/js/jquery.js"></script>
+	<script type="text/javascript" src="http://aoreiamobile.aoreia.com/includes/js/lib/jqueryMobile/jquery.mobile-1.4.2.min.js"></script>	
+	
+	<script type='text/javascript' src="http://wurfl.io/wurfl.js"></script>
+	
+	<script type="text/javascript">
+		var video_play=false;
+		var activePage;
+		
+		function _onDeviceReady (){	
+			
+			
+			
+			$(document).on("pagecontainerhide", function (e, ui) {
+				if(video_play){
+				    if (WURFL.form_factor != "Tablet") {
+					window.plugins.orientationchanger.lockOrientation('portrait');
+					video_play=false;
+					}
+				}
+			});
+			
+			
+			$(document).on('pagebeforeshow', function() {
+				activePage = $.mobile.activePage.attr('id');
+			});
+			
+			//alert(WURFL.form_factor);
+			if (WURFL.form_factor == "Tablet") {
+				//alert('es una tablet');
+				window.plugins.orientationchanger.lockOrientation('landscape');
+				 //setTimeout(function () {navigator.splashscreen.show()},1000);
+			}else{
+				window.plugins.orientationchanger.lockOrientation('portrait');
+			}
+			
+		
+			window.addEventListener("message", function(event) {							 
+			    //navigator.notification.alert('MSG:'+event.data ,function(){});
+				
+				if (event.data == "video") {
+					video_play=true;
+					window.plugins.orientationchanger.lockOrientation('landscape');
+				}
+				if (event.data == "reset") {
+					//window.plugins.orientationchanger.resetOrientation();
+					if (WURFL.form_factor != "Tablet") {
+					window.plugins.orientationchanger.lockOrientation('portrait');
+					}
+					
+				}
+				var pmsg = JSON.parse(event.data);
+				if (pmsg && pmsg.msg=='pdf' ) {
+					window.open(pmsg.url, '_system', 'location=yes');
+					console.log('abriendo pdf..');
+				}
+				var store = JSON.parse(event.data);
+				if (store && store.msg=='store' ) {
+					$.mobile.changePage("#storeHtml");
+					console.log('abriendo store..');
+				}
+			}, false);
+        }
+		
+	function noscreen() {
+		navigator.splashscreen.hide();
+	}
+	</script>
+	
+	<style>
+	 .tails{
+		padding:0;
+		min-height:68px;
+		background-color:#fff;
+		border-color:#fff;
+		
+	 }
+	 
+	 .body{
+		overflow:hidden;
+	 }
+	 
+	 .excecute{
+		margin:0px;
+	 }
+	 
+	 img{
+		max-width:100%;
+	 }
+	 
+	 .ui-body-noPadding{
+		padding:0;
+	 }
+	 
+	 .ui-icon-save{
+		background-image: url("resources/img/Save2.png")
+		;
+	 }
+	 
+	 .grid2{
+		width:20%;
+	 }
+	 
+	 #boxB
+	{
+    transform: rotate(90deg);
+    -webkit-transform:rotate(90deg); /* Safari and Chrome */
+    -moz-transform:rotate(90deg); /* Firefox */
+	
+	}
+	 
+
+@media screen and (max-width: 480px) {
+	#ui-content { float: none; width: 100%; }
+	#sidebar { float: none; width: 100%; padding: 20px; }
+	
+	.body{
+		overflow:hidden;
+	 }
+	 
+	.grid {float:none; margin:0;}
+	
+	.grid2 {max-height:78px;}
+	.grid3 {margin-top:-10px;}
+		
+	.tails{padding-left:50px;width:100%;min-height:68px;background-color:#fff;border-color:#fff; color:#fff;}
+	.ui-grid-a > .ui-block-a, .ui-grid-a > .ui-block-b {
+		width: 100%;
+			
+	}
+	
+		
+	.ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, html body .ui-group-theme-a .ui-btn, html head + body .ui-btn.ui-btn-a, .ui-page-theme-a .ui-btn:visited, html .ui-bar-a .ui-btn:visited, html .ui-body-a .ui-btn:visited, html body .ui-group-theme-a .ui-btn:visited, html head + body .ui-btn.ui-btn-a:visited {
+		background-color: transparent !important;
+		border-color: transparent !important;
+		color: #333333;
+		text-shadow: 0 1px 0 #F3F3F3;
+		width: 100%;
+		/*padding:0;*/
+	}
+	.btn{
+		padding:0;
+		left:-52px;
+		right:-22px;
+	}
+	
+	.ui-barrr{
+		background-color: rgba(0, 0, 0, 0) !important;
+		border: medium none;
+		/*box-shadow: none;*/
+		color: #333333;
+		margin: 0;
+		padding: 0;
+		text-shadow: 0 1px 0 #F3F3F3;
+		display:inline;
+		border-radius:0;
+		width: 100%;
+	}
+	
+	.ui-btn2{
+	position:relative;
+	}
+	
+	.forgot{
+		background-color: #333333;
+		text-shadow: 0 1px 0 #F3F3F3;
+	}
+	
+	.left{
+		left:30px;	
+				
+	}
+	
+	.max{
+		max-width: 350px; 
+		margin: 0px auto;
+	}
+	
+	.hei{
+		height:90%;
+	}
+	
+	.face{
+		
+		/*background-repeat:no-repeat;*/
+		padding:0;
+	}
+	.nada{display:none;}
+	.desktop{display:none;}
+	.tablet{display:none;}
+	.lef{left:5px;}
+	.vertical{display:none;}
+	
+}
+	
+	
+	
+	@media screen and (min-width: 480px) and (orientation: portrait){
+
+	#ui-content { float: none; width: 100%; }
+	#sidebar { float: none; width: 100%; padding: 20px; }
+	
+	.body{
+		overflow:hidden;
+	 }
+	 
+	.grid {float:left; margin:0;}
+	
+	.grid2 {max-height:78px;}
+	.grid3 {margin-top:-10px;}
+		
+	.tails{padding-left:50px;width:100%;min-height:58px;background-color:#fff;border-color:#fff; color:#fff;}
+	.ui-grid-a > .ui-block-a, .ui-grid-a > .ui-block-b {
+		width: 100%;
+			
+	}
+	
+		
+	.ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, html body .ui-group-theme-a .ui-btn, html head + body .ui-btn.ui-btn-a, .ui-page-theme-a .ui-btn:visited, html .ui-bar-a .ui-btn:visited, html .ui-body-a .ui-btn:visited, html body .ui-group-theme-a .ui-btn:visited, html head + body .ui-btn.ui-btn-a:visited {
+		background-color: transparent !important;
+		border-color: transparent !important;
+		color: #333333;
+		text-shadow: 0 1px 0 #F3F3F3;
+		width: 100%;
+		/*padding:0;*/
+	}
+	.btn{
+		padding:0;
+		left:-52px;
+		right:-22px;
+	}
+	
+	.ui-barrr{
+		background-color: rgba(0, 0, 0, 0) !important;
+		border: medium none;
+		/*box-shadow: none;*/
+		color: #333333;
+		margin: 0;
+		padding: 0;
+		text-shadow: 0 1px 0 #F3F3F3;
+		display:inline;
+		border-radius:0;
+		width: 100%;
+	}
+	
+	.ui-btn2{
+	position:relative;
+	}
+	
+	.forgot{
+		background-color: #333333;
+		text-shadow: 0 1px 0 #F3F3F3;
+	}
+	
+	.left{
+		left:30px;	
+				
+	}
+	
+	.max{
+		max-width: 350px; 
+		margin: 0px auto;
+	}
+	
+	.hei{
+		height:90%;
+	}
+	
+	.height{
+		height:68px;
+	}
+	
+	.nada{
+
+		//margin-top:-5px;
+		margin-bottom:-15px;
+		
+	}
+	.tablet{display:none;}
+	.desktop{display:none;}
+	.face{display:none;}
+	.lef{left:0px;}
+	.vertical{display:none;}
+	img{max-width:100%;width:100%;}
+		
+	 
+		
+	}
+	
+	
+	@media screen and (min-width: 705px) and (orientation: landscape){
+
+		#ui-content { float: none; width: 100%; }
+	#sidebar { float: none; width: 100%; padding: 20px; }
+	
+	.body{
+		overflow:hidden;
+	 }
+	 
+	.grid {float:left; margin:0;height:58px;}
+	
+	.grid2 {max-height:78px;}
+	.grid3 {margin-top:-10px;}
+		
+	.tails{padding-left:50px;width:100%;min-height:58px;background-color:#fff;border-color:#fff; color:#fff;}
+	
+	.ui-grid-a > .ui-block-a, .ui-grid-a > .ui-block-b {
+		width: 100%;
+			
+	}
+	
+	.ui-grid-b>.ui-block-a, .ui-grid-b>.ui-block-b, .ui-grid-b>.ui-block-c{
+		height: 100%;
+	}
+	
+		
+	.ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, html body .ui-group-theme-a .ui-btn, html head + body .ui-btn.ui-btn-a, .ui-page-theme-a .ui-btn:visited, html .ui-bar-a .ui-btn:visited, html .ui-body-a .ui-btn:visited, html body .ui-group-theme-a .ui-btn:visited, html head + body .ui-btn.ui-btn-a:visited {
+		background-color: transparent !important;
+		border-color: transparent !important;
+		color: #333333;
+		text-shadow: 0 1px 0 #F3F3F3;
+		width: 100%;
+		/*padding:0;*/
+	}
+	.btn{
+		padding:0;
+		left:-52px;
+		right:-22px;
+	}
+	
+	.ui-barrr{
+		background-color: rgba(0, 0, 0, 0) !important;
+		border: medium none;
+		/*box-shadow: none;*/
+		color: #333333;
+		margin: 0;
+		padding: 0;
+		text-shadow: 0 1px 0 #F3F3F3;
+		display:inline;
+		border-radius:0;
+		width: 100%;
+	}
+	
+	.ui-btn2{
+	position:relative;
+	}
+	
+	.forgot{
+		background-color: #333333;
+		text-shadow: 0 1px 0 #F3F3F3;
+	}
+	
+	.left{
+		left:30px;	
+				
+	}
+	
+	.max{
+		max-width: 350px; 
+		margin: 0px auto;
+	}
+	
+	.hei{
+		height:90%;
+	}
+	
+	.height{
+		height:98px;
+	}
+	
+	.nada{
+
+		//margin-top:-5px;
+		margin-bottom:-15px;
+	}
+	.tablet{display:none;}
+	.desktop{display:none;}
+	.face{display:none;}
+	.lef{left:0px;}
+	.vertical{display:none;}
+	img{max-width:100%;width:100%;}
+	 
+		
+	}
+	
+		
+	@media screen and (min-width: 1024px) {
+	
+		.tablet{display:none;}
+		.nada{padding:0;}
+		
+	}
+	</style>
+	
+</head>
+<body overflow:hidden;">
+
+
+<div id="xLOG"></div>
+
+<div data-role="page" data-theme="b" id="splash" style="background-color: #fff;"> 
+    <div class="splash">
+        <img src="resources/img/logo_aoreia.png" alt="splash" />
+    </div>
+</div> 
+
+<div data-role="page" id="inicio" style="background:#fff;" class="hei" > 
+	
+	<div data-role="header" data-position="fixed" style="background:#E98C40;height:50px;">
+	
+	
+		<div class="ui-mini ui-btn-left ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/menu-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;left:20%;" class="ui-btn ui-btn-icon-notext excecute ui-first-child" data-excecute="menuVertical" data-theme="b" href="#nav-panel1">No text</a>
+			
+			</div>
+		</div>
+	
+		<h3 class="ui-title" role="heading" aria-level="1" style="color:#0057A6;font-size:20px;"> AOREIA.COM  </h3>
+	
+		<div class="ui-mini ui-btn-right ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">
+				<!--a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;" class="ui-btn ui-icon-search ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="#">No text</a-->
+				<a id="hideText" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/search-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn  ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>
+				<a id="showText" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;display:none;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/delete-36.png');background-repeat:no-repeat; background-size: 25px 25px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>								
+				
+				
+				<div id='searchInicio' style='position:absolute; left: -180px; top: -5px; display:none;white-space: nowrap'>
+				<input style="width:120px;" type="search" class="searchInicio" id="searchInicio" name="searchInicio" autofocus></div>
+				<!--a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('resources/img/icon/quit-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" onclick="exitFromApp();return false;">No text</a-->				
+			    </div>
+		</div>
+
+	
+	</div><!-- /header --> 
+			 
+	<div data-role="content" class="ui-content ui-body-noPadding">
+		
+		<!--iframe id="homeHtml" class="iframeRender" style="height: 759px; width:1500px; border:1px solid white;" src="homeinside.php"></iframe-->
+	<div class="ui-body ui-body-noPadding" style="padding:0">
+	
+					<div class="ui-grid-b nada">
+						<div class="ui-block-c grid">
+							<div class="ui-bar ui-bar-a tails">
+								<a class="ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#weeklyHtml" data-transition="slide" data-title="AOREIA WEEKLY" role="button">
+								<img src="http://aoreiamobile.aoreia.com/resources/img/new/weeklyinsight.png"/>								
+								</a>
+							</div>
+						</div>						
+						<div class="ui-block-c grid">
+							<div class="ui-bar ui-bar-a tails">
+								<a class="ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#testimonialsHtml" data-transition="slide" data-title="AOREIA TESTIMONIALS" role="button">
+								<img src="http://aoreiamobile.aoreia.com/resources/img/new/testimonials.png"/>						
+								</a>
+							</div>
+						</div>
+						<div class="ui-block-c grid">
+							<div class="ui-bar ui-bar-a tails">
+								<a class="ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#faqHtml" data-transition="slide" data-title="AOREIA FAQ" role="button">
+								<img src="http://aoreiamobile.aoreia.com/resources/img/new/faq.png"/>								
+								</a>
+							</div>
+						</div>												
+					</div>
+					
+					<div class="ui-grid-b nada">
+						<div class="ui-block-c grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#storeHtml" role="button">
+								<img src="http://aoreiamobile.aoreia.com/resources/img/new/store.png"/>
+								</a>
+							</div>							
+						</div>						
+						<div class="ui-block-c grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#videosHtml" data-transition="slide" data-title="AOREIA VIDEOS" role="button">
+									<img src="http://aoreiamobile.aoreia.com/resources/img/new/videos.png"/>
+								</a>
+							</div>
+						</div>
+						<div class="ui-block-c grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#audiosHtml" data-transition="slide" data-title="AOREIA AUDIOS BOOKS" role="button">
+								<img src="http://aoreiamobile.aoreia.com/resources/img/new/audiobooks.png"/>								
+								</a>
+							</div>							
+						</div>												
+					</div>
+					<div class="ui-grid-b nada">
+						<div class="ui-block-c grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#articlesHtml" data-transition="slide" data-title="AOREIA ARTICLES" role="button">
+								<img src="http://aoreiamobile.aoreia.com/resources/img/new/article.png"/>								
+								</a>
+							</div>						
+						</div>						
+						<div class="ui-block-c grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#filesHtml" data-transition="slide" data-title="AOREIA FILES"  role="button">
+									<img src="http://aoreiamobile.aoreia.com/resources/img/new/files.png"/>									
+								</a>
+							</div>
+						</div>
+						<div class="ui-block-c grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#recentHtml" data-transition="slide" data-title="AOREIA RECENT DEALS" role="button">
+									<img src="http://aoreiamobile.aoreia.com/resources/img/new/recent_deal.png"/>									
+								</a>
+							</div>						
+						</div>												
+					</div>
+					
+					<div class="ui-grid-b nada">
+						<div class="ui-block-c grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#meetingsHtml" data-transition="slide" data-title="AOREIA MEETINGS ARCHIVE" role="button">
+									<img src="http://aoreiamobile.aoreia.com/resources/img/new/meeting_archives.png"/>									
+								</a>
+							</div>						
+						</div>						
+						<div class="ui-block-c grid">
+							<div class="ui-bar ui-bar-a tails" style="border-radius:none !important;background-color:#fff;border-color:#fff;">
+								<a class="ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#contactUsHtml" data-transition="slide" data-title="AOREIA CONTACT US" role="button">
+								<img src="http://aoreiamobile.aoreia.com/resources/img/new/contactus.png"/>
+								</a>
+							</div>
+						</div>
+						<div class="ui-block-c grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#aboutUsHtml" data-transition="slide" data-title="AOREIA ABOUT US" role="button">
+									<img src="http://aoreiamobile.aoreia.com/resources/img/new/aboutus.png"/>
+								</a>
+							</div>						
+						</div>												
+					</div>
+					
+					<div class="ui-grid-b nada">
+						<div class="ui-block-c grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#legalHtml" data-transition="slide" data-title="AOREIA LEGAL" role="button">
+									<img src="http://aoreiamobile.aoreia.com/resources/img/new/legal.png"/>
+								</a>
+							</div>					
+						</div>						
+						<div class="ui-block-c grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#glossaryHtml" data-transition="slide" data-title="AOREIA GLOSSARY" role="button">
+									<img src="http://aoreiamobile.aoreia.com/resources/img/new/glossary.png"/>
+								</a>								
+							</div>
+						</div>
+						<div class="ui-block-c grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#sponsorsHtml" data-transition="slide" data-title="AOREIA SPONSORS" role="button">
+									<img src="http://aoreiamobile.aoreia.com/resources/img/new2/sponsors11.png"/>
+								</a>
+							</div>						
+						</div>												
+					</div>
+					
+					<div class="ui-grid-b nada">
+						<div class="ui-block-c grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="ui-link ui-btn2 ui-shadow ui-corner-all btn" onclick="window.open('https://www.facebook.com/pages/Americas-Online-REIA-LLC/122993624562827?skip_nax_wizard=true','_system','location=no');" href="#" data-transition="slide" data-title="AOREIA FACEBOOK"  role="button">
+									<img src="http://aoreiamobile.aoreia.com/resources/img/new/facebook.png"/>
+								</a>								
+							</div>					
+						</div>						
+						<div class="ui-block-c grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="ui-link ui-btn2 ui-shadow ui-corner-all btn" onclick="window.open('https://twitter.com/AOREIA','_system','location=no');" href="#" role="button">
+									<img src="http://aoreiamobile.aoreia.com/resources/img/new/twitter.png"/>
+								</a>
+							</div>
+						</div>
+						<div class="ui-block-c grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="ui-link ui-btn2 ui-shadow ui-corner-all btn" onclick="window.open('http://www.linkedin.com/pub/americas-online-reia-llc/6a/933/928','_system','location=no');" href="#" role="button">
+									<img src="http://aoreiamobile.aoreia.com/resources/img/new/linkedin.png"/>
+								</a>
+							</div>						
+						</div>												
+					</div>
+					
+					
+					<!-- faceMobile-->
+					<div class="ui-grid-a face">
+
+						<div class="ui-block-a grid">
+							<div class="ui-bar ui-bar-a tails">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#weeklyHtml" data-transition="slide" data-title="AOREIA WEEKLY" role="button">
+								<img class="face" src="http://aoreiamobile.aoreia.com/resources/img/new2/weekly_insight.png"/>
+								</a>
+							</div>
+						</div>
+						
+						<div class="ui-block-b grid">
+							<div class="ui-bar ui-bar-a tails">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#testimonialsHtml" data-transition="slide" data-title="AOREIA TESTIMONIALS" role="button">								
+								<img class="face" src="http://aoreiamobile.aoreia.com/resources/img/new2/testimonials.png"/>
+								</a>
+							</div>
+						</div>
+						<div class="ui-block-a grid">
+							<div class="ui-bar ui-bar-a tails">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#faqHtml" data-transition="slide" data-title="AOREIA FAQ" role="button">								
+								<img class="face" src="http://aoreiamobile.aoreia.com/resources/img/new2/faq.png"/>
+								</a>
+							</div>
+						</div>
+						<div class="ui-block-b grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#audiosHtml" data-transition="slide" data-title="AOREIA AUDIOS BOOKS" role="button">								
+								<img class="face" src="http://aoreiamobile.aoreia.com/resources/img/new2/audio_books.png"/>
+								</a>
+							</div>
+						</div>
+						
+					</div>										
+					
+					<div class="ui-grid-a face">
+
+						<div class="ui-block-a grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#videosHtml" data-transition="slide" data-title="AOREIA VIDEOS" role="button">									
+									<img class="face" src="http://aoreiamobile.aoreia.com/resources/img/new2/videos.png"/>
+								</a>
+							</div>
+						</div>
+						
+						<div class="ui-block-b grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#storeHtml" role="button">								
+								<img class="face" src="http://aoreiamobile.aoreia.com/resources/img/new2/store.png"/>
+								</a>
+							</div>
+						</div>
+						<div class="ui-block-a grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#filesHtml" data-transition="slide" data-title="AOREIA FILES" role="button">								
+									<img class="face" src="http://aoreiamobile.aoreia.com/resources/img/new2/files.png"/>
+								</a>
+							</div>
+						</div>
+						<div class="ui-block-b grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#articlesHtml" data-transition="slide" data-title="AOREIA ARTICLES" role="button">								
+								<img class="face" src="http://aoreiamobile.aoreia.com/resources/img/new2/article.png"/>
+								</a>
+							</div>
+						</div>
+						
+					</div>									
+					
+					<div class="ui-grid-a face">
+						
+						<div class="ui-block-a grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#sponsorsHtml" data-transition="slide" data-title="AOREIA SPONSORS" role="button">
+									<img class="face" src="http://aoreiamobile.aoreia.com/resources/img/new2/sponsors33.png"/>
+								</a>
+							</div>						
+						</div>	
+						<div class="ui-block-a grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#recentHtml" data-transition="slide" data-title="AOREIA RECENT DEALS" role="button">									
+									<img class="face" src="http://aoreiamobile.aoreia.com/resources/img/new2/recent_deal.png"/>									
+								</a>
+							</div>
+						</div>
+						
+						<div class="ui-block-b grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#meetingsHtml" data-transition="slide" data-title="AOREIA MEETINGS ARCHIVE" role="button">									
+									<img class="face" src="http://aoreiamobile.aoreia.com/resources/img/new2/meeting_archives.png"/>
+								</a>
+							</div>
+						</div>
+						<div class="ui-block-a grid">
+							<div class="ui-bar ui-bar-a tails max lef" style="border-radius:none !important;background-color:#fff;border-color:#fff;">	
+								<a style="width: 48%; float: left;" class="face excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#contactUsHtml" data-transition="slide" data-title="AOREIA CONTACT" role="button">
+								<img class="face" src="http://aoreiamobile.aoreia.com/resources/img/new2/contact_us_mini.png"/>	
+								</a>
+								<a style="width: 48%; float: right;" class="face excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#aboutUsHtml" data-transition="slide" data-title="AOREIA ABOUT" role="button">
+								<img  class="face" src="http://aoreiamobile.aoreia.com/resources/img/new2/about_us_mini.png"/>
+								</a>
+							</div>
+						</div>
+						<div class="ui-block-b grid">
+							<div class="ui-bar ui-bar-a tails max lef" style="background-color:#fff;border-color:#fff;">								
+								<a style="width:30%;float:left;" class="face excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" onclick="window.open('https://www.facebook.com/pages/Americas-Online-REIA-LLC/122993624562827?skip_nax_wizard=true','_system','location=no');" href="#" data-transition="slide" data-title="AOREIA FACEBOOK" role="button">
+								<img class="face " src="http://aoreiamobile.aoreia.com/resources/img/new2/facebook_mini.png"/>
+								</a>
+								<a style="width:30%;float:left;margin-left:1em;" class="face excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" onclick="window.open('https://twitter.com/AOREIA','_system','location=no');" href="#" data-transition="slide" data-title="AOREIA TWITTER" role="button">
+								<img class="face" src="http://aoreiamobile.aoreia.com/resources/img/new2/twitter_mini.png"/>
+								</a>
+								<a style="width:30%;float:right;" class="face excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" onclick="window.open('http://www.linkedin.com/pub/americas-online-reia-llc/6a/933/928','_system','location=no');" href="#" data-transition="slide" data-title="AOREIA LINKEDIN" role="button">
+								<img class="face " src="http://aoreiamobile.aoreia.com/resources/img/new2/linkedin_mini.png"/>
+								</a>
+							</div>
+						</div>
+						
+					</div>										
+					
+					<div class="ui-grid-a face">
+
+						<div class="ui-block-a grid">
+							<div class="ui-bar ui-bar-a tails max lef" style="background-color:#fff;border-color:#fff;">								
+								<a style="width: 48%; float: left;" class="face excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#legalHtml" data-transition="slide" data-title="AOREIA LEGAL"  role="button">
+								<img class="face excecute " src="http://aoreiamobile.aoreia.com/resources/img/new2/legal_mini.png"/>	
+								</a>
+								<a style="width: 48%; float: right;" class="face excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#glossaryHtml" data-transition="slide" data-title="AOREIA GLOSSARY" role="button">
+								<img class="face excecute " src="http://aoreiamobile.aoreia.com/resources/img/new2/glosary_mini.png"/>
+								</a>
+							</div>
+						</div>												
+						
+					</div>
+					
+					<!--tablet-->					
+					<div class="ui-grid-a tablet">
+
+						<div class="ui-block-a grid">
+							<div class="ui-bar ui-bar-a tails">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#weeklyHtml" data-transition="slide" data-title="AOREIA WEEKLY" role="button">
+								<img class="tablet" src="http://aoreiamobile.aoreia.com/resources/img/new2/weekly_insight.png"/>
+								</a>
+							</div>
+						</div>
+						
+						<div class="ui-block-b grid">
+							<div class="ui-bar ui-bar-a tails">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#testimonialsHtml" data-transition="slide" data-title="AOREIA TESTIMONIALS" role="button">								
+								<img class="tablet" src="http://aoreiamobile.aoreia.com/resources/img/new2/testimonials.png"/>
+								</a>
+							</div>
+						</div>
+						<div class="ui-block-a grid">
+							<div class="ui-bar ui-bar-a tails">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#faqHtml" data-transition="slide" data-title="AOREIA FAQ" role="button">								
+								<img class="tablet" src="http://aoreiamobile.aoreia.com/resources/img/new2/faq.png"/>
+								</a>
+							</div>
+						</div>
+						<div class="ui-block-b grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#audiosHtml" data-transition="slide" data-title="AOREIA AUDIOS BOOKS" role="button">								
+								<img class="tablet" src="http://aoreiamobile.aoreia.com/resources/img/new2/audio_books.png"/>
+								</a>
+							</div>
+						</div>
+						
+					</div>										
+					
+					<div class="ui-grid-a tablet">
+
+						<div class="ui-block-a grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#videosHtml" data-transition="slide" data-title="AOREIA VIDEOS" role="button">									
+									<img class="tablet" src="http://aoreiamobile.aoreia.com/resources/img/new2/videos.png"/>
+								</a>
+							</div>
+						</div>
+						
+						<div class="ui-block-b grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#storeHtml" role="button">								
+								<img class="tablet" src="http://aoreiamobile.aoreia.com/resources/img/new2/store.png"/>
+								</a>
+							</div>
+						</div>
+						<div class="ui-block-a grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#filesHtml" data-transition="slide" data-title="AOREIA FILES"  role="button">								
+									<img class="tablet" src="http://aoreiamobile.aoreia.com/resources/img/new2/files.png"/>
+								</a>
+							</div>
+						</div>
+						<div class="ui-block-b grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#articlesHtml" data-transition="slide" data-title="AOREIA ARTICLES" role="button">								
+								<img class="tablet" src="http://aoreiamobile.aoreia.com/resources/img/new2/article.png"/>
+								</a>
+							</div>
+						</div>
+						
+					</div>									
+					
+					<div class="ui-grid-a tablet">
+
+						<div class="ui-block-a grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#recentHtml" data-transition="slide" data-title="AOREIA RECENT DEALS" role="button">									
+									<img class="tablet" src="http://aoreiamobile.aoreia.com/resources/img/new2/recent_deal.png"/>									
+								</a>
+							</div>
+						</div>
+						
+						<div class="ui-block-b grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#meetingsHtml" data-transition="slide" data-title="AOREIA MEETINGS ARCHIVE" role="button">									
+									<img class="tablet" src="http://aoreiamobile.aoreia.com/resources/img/new2/meeting_archives.png"/>
+								</a>
+							</div>
+						</div>
+						<div class="ui-block-a grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">	
+								<a class="tablet excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#contactUsHtml" data-transition="slide" data-title="AOREIA CONTACT" role="button">
+								<img class="tablet" src="http://aoreiamobile.aoreia.com/resources/img/new2/contact-us.png"/>	
+								</a>								
+							</div>
+						</div>
+						<div class="ui-block-b grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">							
+								<a class="tablet excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#aboutUsHtml" data-transition="slide" data-title="AOREIA ABOUT" role="button">
+								<img  class="tablet" src="http://aoreiamobile.aoreia.com/resources/img/new2/about_us.png"/>
+								</a>
+							</div>
+						</div>
+						<div class="ui-block-a grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">
+								<a class="tablet excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#sponsorsHtml" data-transition="slide" data-title="AOREIA SPONSORS" role="button">
+									<img class="tablet" src="http://aoreiamobile.aoreia.com/resources/img/new2/sponsors33.png"/>
+								</a>
+							</div>
+						</div>
+						<div class="ui-block-b grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">								
+								<a class="tablet excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" onclick="window.open('https://www.facebook.com/pages/Americas-Online-REIA-LLC/122993624562827?skip_nax_wizard=true','_system','location=no');" href="#" data-transition="slide" data-title="AOREIA FACEBOOK" role="button">
+								<img class="tablet " src="http://aoreiamobile.aoreia.com/resources/img/new2/facebook.png"/>
+								</a>								
+							</div>
+						</div>
+						<div class="ui-block-a grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">																
+								<a class="tablet excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" onclick="window.open('https://twitter.com/AOREIA','_system','location=no');" href="#" data-transition="slide" data-title="AOREIA TWITTER" role="button">
+								<img class="tablet" src="http://aoreiamobile.aoreia.com/resources/img/new2/twitter.png"/>
+								</a>
+								
+							</div>
+						</div>
+						<div class="ui-block-b grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">																
+								<a class="tablet excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" onclick="window.open('http://www.linkedin.com/pub/americas-online-reia-llc/6a/933/928','_system','location=no');" href="#" data-transition="slide" data-title="AOREIA LINKEDIN" role="button">
+								<img class="tablet " src="http://aoreiamobile.aoreia.com/resources/img/new2/linkedin.png"/>
+								</a>
+							</div>
+						</div>
+						
+					</div>										
+					
+					<div class="ui-grid-a tablet">
+
+						<div class="ui-block-a grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">								
+								<a class="tablet excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#legalHtml" data-transition="slide" data-title="AOREIA LEGAL" role="button">
+								<img class="tablet excecute " src="http://aoreiamobile.aoreia.com/resources/img/new2/legal.png"/>	
+								</a>								
+							</div>
+						</div>	
+						<div class="ui-block-b grid">
+							<div class="ui-bar ui-bar-a tails" style="background-color:#fff;border-color:#fff;">																
+								<a class="tablet excecute ui-link ui-btn2 ui-shadow ui-corner-all btn" href="#glossaryHtml" data-transition="slide" data-title="AOREIA GLOSSARY" role="button">
+								<img class="tablet excecute " src="http://aoreiamobile.aoreia.com/resources/img/new2/glosary.png"/>
+								</a>
+							</div>
+						</div>							
+						
+					</div>
+
+					
+				</div>
+			
+		
+		<!--iframe id="webGeneral" class="iframeRender ui-body ui-body-noPadding tails" style="height: 850px; width:100%;border:1px solid white;padding:0;" >
+			<html>
+				<head></head>
+				<body></body>
+			</html>
+		</iframe-->
+		
+		<div data-role="panel" id="nav-panel1" data-display="overlay" data-position="left">
+			<ul data-role="listview" data-icon="false">
+			 <!--li data-icon="delete"-->
+			  <a class="closeMenu" style="display:none;" href="#" data-rel="close">Close</a>
+			 <!--/li-->
+			 <!--li data-role="list-divider">Share this page</li style="background-image: url('resources/img/new2/a-weekly_insight.png');background-repeat:no-repeat;background-size: 50px 50px;"-->
+			 <!--li><a class="excecute" data-excecute="settings" href="#settingHtml">My Settings</a></li-->
+			 <li><a class="excecute weekly"   href="#weeklyHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weekly Insight</a></li>
+			 <li><a class="excecute testi"    href="#testimonialsHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testimonials</a></li>
+			 <li><a class="excecute faq"      href="#faqHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAQ</a></li>
+			 <li><a class="excecute audio"    href="#audiosHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Audios</a></li>
+			 <li><a class="excecute store"    href="#storeHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Store</a></li>
+			 <li><a class="excecute video"    href="#videosHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Videos Books</a></li>
+			 <li><a class="excecute files"    href="#filesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</a></li>			 
+			 <li><a class="excecute article"  href="#articlesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Articles</a></li>
+			 <li><a class="excecute sponsors" href="#sponsorsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sponsors</a></li>
+			 <li><a class="excecute recent"   href="#recentHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recent Deals</a></li>
+			 <li><a class="excecute meeting"  href="#meetingsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meetings Archives</a></li>
+			 <li><a class="excecute contact"  href="#contactUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contacts Us</a></li>
+			 <li><a class="excecute about"    href="#aboutUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About Us</a></li>
+			 <li><a class="excecute legal"    href="#legalHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Legal</a></li>
+			 <li><a class="excecute glossary" href="#glossaryHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Glossary</a></li>
+			 <li><a class="excecute facebook" onclick="window.open('https://www.facebook.com/pages/Americas-Online-REIA-LLC/122993624562827?skip_nax_wizard=true','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facebook</a></li>
+			 <li><a class="excecute twitter"  onclick="window.open('https://twitter.com/AOREIA','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Twitter</a></li>
+			 <li><a class="excecute linkedin" onclick="window.open('http://www.linkedin.com/pub/americas-online-reia-llc/6a/933/928','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linkedin</a></li>
+			 <!--li><a class="excecute" data-excecute="managerSearch" href="javascript:void(0);">NewsLetters</a></li-->
+			</ul>
+		</div><!-- /panel -->
+		
+	</div>
+</div>
+
+
+<div data-role="page" id="weeklyHtml" style="background:#fff;">
+
+	<div data-role="header" data-position="fixed" style="background:#E98C40;">
+	
+	
+		<div class="ui-mini ui-btn-left ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/backk-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="weekly" data-theme="b" href="/" data-rel="back">No text</a>
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/menu-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:5px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="weekly" data-theme="b" href="#nav-panel2">No text</a>
+				<!--a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('resources/img/Save2.png');background-repeat:no-repeat;margin-left:-11px;background-position:center center;left:10%;" class="ui-btn ui-icon-save ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="main-Menu" data-theme="b" href="#save">No text</a-->
+			</div>
+		</div>
+	
+		<h3 class="ui-title" role="heading" aria-level="1" style="color:#0057A6;font-size:18px;"> Weekly Insight  </h3>
+	
+		<div class="ui-mini ui-btn-right ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">				
+				<a id="hide1" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/search-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn  ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>
+				<a id="show1" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;display:none;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/delete-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>								
+				
+				<div id='searchWeekly' style='position:absolute; left: -190px; top: -5px; display:none;white-space: nowrap'>
+				<input style="width:120px;" type="search" class="searchWeekly" id="searchWeekly" name="searchWeekly" autofocus></div>
+				
+				<!--input type='button' id='hideText' value='Hide Text' style='position:absolute;left:0px'-->
+				<!--input type='button' id='showText' value='Show Text' style='display:none; position:absolute;right:0px;'-->
+					
+			</div>
+		</div>
+
+	</div><!-- /header --> 
+	
+	<div data-role="content" class="ui-content ui-body-noPadding">	
+			<iframe id="webWeeklyHtml" class="iframeRender" style="width:100%; border:0 solid white;margin-top:-20px;" src="http://aoreiamobile.aoreia.com/weekly.php?p=1">
+				<html>
+					<head></head>
+					<body></body>
+				</html>
+			</iframe>
+	</div>	
+	
+	<div data-role="panel" id="nav-panel2" data-display="overlay" data-position="left">
+			<ul data-role="listview" data-icon="false">
+			 <!--li data-icon="delete"-->
+			  <a class="closeMenu" style="display:none;" href="#" data-rel="close">Close</a>
+			 <!--/li-->
+			 <!--li data-role="list-divider">Share this page</li style="background-image: url('resources/img/new2/a-weekly_insight.png');background-repeat:no-repeat;background-size: 50px 50px;"-->
+			 <!--li><a class="excecute" data-excecute="settings" href="#settingHtml">My Settings</a></li-->
+			 <li><a class="excecute weekly"   href="#weeklyHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weekly Insight</a></li>
+			 <li><a class="excecute testi"    href="#testimonialsHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testimonials</a></li>
+			 <li><a class="excecute faq"      href="#faqHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAQ</a></li>
+			 <li><a class="excecute audio"    href="#audiosHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Audios</a></li>
+			 <li><a class="excecute store"    href="#storeHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Store</a></li>
+			 <li><a class="excecute video"    href="#videosHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Videos Books</a></li>
+			 <li><a class="excecute files"    href="#filesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</a></li>			 
+			 <li><a class="excecute article"  href="#articlesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Articles</a></li>
+			 <li><a class="excecute sponsors" href="#sponsorsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sponsors</a></li>
+			 <li><a class="excecute recent"   href="#recentHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recent Deals</a></li>
+			 <li><a class="excecute meeting"  href="#meetingsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meetings Archives</a></li>
+			 <li><a class="excecute contact"  href="#contactUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contacts Us</a></li>
+			 <li><a class="excecute about"    href="#aboutUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About Us</a></li>
+			 <li><a class="excecute legal"    href="#legalHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Legal</a></li>
+			 <li><a class="excecute glossary" href="#glossaryHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Glossary</a></li>
+			 <li><a class="excecute facebook" onclick="window.open('https://www.facebook.com/pages/Americas-Online-REIA-LLC/122993624562827?skip_nax_wizard=true','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facebook</a></li>
+			 <li><a class="excecute twitter"  onclick="window.open('https://twitter.com/AOREIA','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Twitter</a></li>
+			 <li><a class="excecute linkedin" onclick="window.open('http://www.linkedin.com/pub/americas-online-reia-llc/6a/933/928','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linkedin</a></li>
+			 <!--li><a class="excecute" data-excecute="managerSearch" href="javascript:void(0);">NewsLetters</a></li-->
+			</ul>
+	</div><!-- /panel -->
+	
+	<!--div data-role="collapsible">
+	<h4></h4>
+	<p>I'm the collapsible content. By default I'm closed, but you can click the header to open me.</p>
+	</div-->
+	
+ 
+</div>
+
+<div data-role="page" id="testimonialsHtml" style="background:#fff;">
+
+	<div data-role="header" data-position="fixed" style="background:#E98C40;">
+	
+	
+		<div class="ui-mini ui-btn-left ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/backk-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="testimonials" data-theme="b" href="/" data-rel="back">No text</a>
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/menu-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:5px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="testimonials" data-theme="b" href="#nav-panel3">No text</a>
+				<!--a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('resources/img/Save2.png');background-repeat:no-repeat;margin-left:-11px;background-position:center center;left:10%;" class="ui-btn ui-icon-save ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="main-Menu" data-theme="b" href="#save">No text</a-->
+			</div>
+		</div>
+	
+		<h3 class="ui-title" role="heading" aria-level="1" style="color:#0057A6;font-size:18px;"> Testimonials  </h3>
+	
+		<div class="ui-mini ui-btn-right ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">				
+				<a id="hide2" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/search-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn  ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>
+				<a id="show2" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;display:none;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/delete-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>								
+				
+				<div id='searchTest' style='position:absolute; left: -190px; top: -5px; display:none;white-space: nowrap'>
+				<input style="width:120px;" type="search" id="searchTest" name="searchTest" autofocus></div>
+				
+				<!--input type='button' id='hideText' value='Hide Text' style='position:absolute;left:0px'-->
+				<!--input type='button' id='showText' value='Show Text' style='display:none; position:absolute;right:0px;'-->
+					
+			</div>
+		</div>
+
+	</div><!-- /header --> 
+			 
+	<div data-role="content" class="ui-content ui-body-noPadding">	
+		<iframe id="webTestimonialsHtml" class="iframeRender" style="width:100%; border:0 solid white;" src="http://aoreiamobile.aoreia.com/testimoni.php">
+			<html>
+				<head></head>
+				<body></body>
+			</html>
+		</iframe>
+	</div>
+	
+	<div data-role="panel" id="nav-panel3" data-display="overlay" data-position="left">
+			<ul data-role="listview" data-icon="false">
+			 <!--li data-icon="delete"-->
+			  <a class="closeMenu" style="display:none;" href="#" data-rel="close">Close</a>
+			 <!--/li-->
+			 <!--li data-role="list-divider">Share this page</li style="background-image: url('resources/img/new2/a-weekly_insight.png');background-repeat:no-repeat;background-size: 50px 50px;"-->
+			 <!--li><a class="excecute" data-excecute="settings" href="#settingHtml">My Settings</a></li-->
+			 <li><a class="excecute weekly"   href="#weeklyHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weekly Insight</a></li>
+			 <li><a class="excecute testi"    href="#testimonialsHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testimonials</a></li>
+			 <li><a class="excecute faq"      href="#faqHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAQ</a></li>
+			 <li><a class="excecute audio"    href="#audiosHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Audios</a></li>
+			 <li><a class="excecute store"    href="#storeHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Store</a></li>
+			 <li><a class="excecute video"    href="#videosHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Videos Books</a></li>
+			 <li><a class="excecute files"    href="#filesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</a></li>			 
+			 <li><a class="excecute article"  href="#articlesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Articles</a></li>
+			 <li><a class="excecute sponsors" href="#sponsorsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sponsors</a></li>
+			 <li><a class="excecute recent"   href="#recentHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recent Deals</a></li>
+			 <li><a class="excecute meeting"  href="#meetingsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meetings Archives</a></li>
+			 <li><a class="excecute contact"  href="#contactUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contacts Us</a></li>
+			 <li><a class="excecute about"    href="#aboutUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About Us</a></li>
+			 <li><a class="excecute legal"    href="#legalHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Legal</a></li>
+			 <li><a class="excecute glossary" href="#glossaryHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Glossary</a></li>
+			 <li><a class="excecute facebook" onclick="window.open('https://www.facebook.com/pages/Americas-Online-REIA-LLC/122993624562827?skip_nax_wizard=true','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facebook</a></li>
+			 <li><a class="excecute twitter"  onclick="window.open('https://twitter.com/AOREIA','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Twitter</a></li>
+			 <li><a class="excecute linkedin" onclick="window.open('http://www.linkedin.com/pub/americas-online-reia-llc/6a/933/928','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linkedin</a></li>
+			 <!--li><a class="excecute" data-excecute="managerSearch" href="javascript:void(0);">NewsLetters</a></li-->
+			</ul>
+	</div><!-- /panel -->
+ 
+</div>
+
+
+<div data-role="page" id="faqHtml" style="background:#fff;">
+
+	<div data-role="header" data-position="fixed" style="background:#E98C40;">
+	
+	
+		<div class="ui-mini ui-btn-left ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/backk-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="faq" data-theme="b" href="/" data-rel="back">No text</a>
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/menu-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:5px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="faq" data-theme="b" href="#nav-panel4">No text</a>
+				<!--a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('resources/img/Save2.png');background-repeat:no-repeat;margin-left:-11px;background-position:center center;left:10%;" class="ui-btn ui-icon-save ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="main-Menu" data-theme="b" href="#save">No text</a-->
+			</div>
+		</div>
+	
+		<h3 class="ui-title" role="heading" aria-level="1" style="color:#0057A6;font-size:18px;"> FAQ </h3>
+	
+		<div class="ui-mini ui-btn-right ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">				
+				<a id="hide3" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/search-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn  ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>
+				<a id="show3" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;display:none;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/delete-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>								
+				
+				<div id='searchFaq' style='position:absolute; left: -190px; top: -5px; display:none;white-space: nowrap'>
+				<input style="width:120px;" type="search" id="searchFaq" name="searchFaq" autofocus></div>
+				
+				<!--input type='button' id='hideText' value='Hide Text' style='position:absolute;left:0px'-->
+				<!--input type='button' id='showText' value='Show Text' style='display:none; position:absolute;right:0px;'-->
+					
+			</div>
+		</div>
+
+	</div><!-- /header --> 
+			 
+	<div data-role="content" class="ui-content ui-body-noPadding">	
+		<iframe id="webFaqHtml" class="iframeRender" style="width:100%; border:0 solid white;" src="http://aoreiamobile.aoreia.com/faqs.php">
+			<html>
+				<head></head>
+				<body></body>
+			</html>
+		</iframe>
+	</div>
+	
+	<div data-role="panel" id="nav-panel4" data-display="overlay" data-position="left">
+			<ul data-role="listview" data-icon="false">
+			 <!--li data-icon="delete"-->
+			  <a class="closeMenu" style="display:none;" href="#" data-rel="close">Close</a>
+			 <!--/li-->
+			 <!--li data-role="list-divider">Share this page</li style="background-image: url('resources/img/new2/a-weekly_insight.png');background-repeat:no-repeat;background-size: 50px 50px;"-->
+			 <!--li><a class="excecute" data-excecute="settings" href="#settingHtml">My Settings</a></li-->
+			 <li><a class="excecute weekly"   href="#weeklyHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weekly Insight</a></li>
+			 <li><a class="excecute testi"    href="#testimonialsHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testimonials</a></li>
+			 <li><a class="excecute faq"      href="#faqHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAQ</a></li>
+			 <li><a class="excecute audio"    href="#audiosHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Audios</a></li>
+			 <li><a class="excecute store"    href="#storeHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Store</a></li>
+			 <li><a class="excecute video"    href="#videosHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Videos Books</a></li>
+			 <li><a class="excecute files"    href="#filesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</a></li>			 
+			 <li><a class="excecute article"  href="#articlesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Articles</a></li>
+			 <li><a class="excecute sponsors" href="#sponsorsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sponsors</a></li>
+			 <li><a class="excecute recent"   href="#recentHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recent Deals</a></li>
+			 <li><a class="excecute meeting"  href="#meetingsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meetings Archives</a></li>
+			 <li><a class="excecute contact"  href="#contactUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contacts Us</a></li>
+			 <li><a class="excecute about"    href="#aboutUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About Us</a></li>
+			 <li><a class="excecute legal"    href="#legalHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Legal</a></li>
+			 <li><a class="excecute glossary" href="#glossaryHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Glossary</a></li>
+			 <li><a class="excecute facebook" onclick="window.open('https://www.facebook.com/pages/Americas-Online-REIA-LLC/122993624562827?skip_nax_wizard=true','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facebook</a></li>
+			 <li><a class="excecute twitter"  onclick="window.open('https://twitter.com/AOREIA','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Twitter</a></li>
+			 <li><a class="excecute linkedin" onclick="window.open('http://www.linkedin.com/pub/americas-online-reia-llc/6a/933/928','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linkedin</a></li>
+			 <!--li><a class="excecute" data-excecute="managerSearch" href="javascript:void(0);">NewsLetters</a></li-->
+			</ul>
+	</div><!-- /panel -->
+ 
+</div>
+
+<div data-role="page" id="articlesHtml" style="background:#fff;">
+
+	<div data-role="header" data-position="fixed" style="background:#E98C40;">
+	
+	
+		<div class="ui-mini ui-btn-left ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/backk-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="articles" data-theme="b" href="/" data-rel="back">No text</a>
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/menu-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:5px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="articles" data-theme="b" href="#nav-panel5">No text</a>
+				<!--a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('resources/img/Save2.png');background-repeat:no-repeat;margin-left:-11px;background-position:center center;left:10%;" class="ui-btn ui-icon-save ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="main-Menu" data-theme="b" href="#save">No text</a-->
+			</div>
+		</div>
+	
+		<h3 class="ui-title" role="heading" aria-level="1" style="color:#0057A6;font-size:18px;"> Articles </h3>
+	
+		<div class="ui-mini ui-btn-right ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">				
+				<a id="hide4" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/search-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn  ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>
+				<a id="show4" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;display:none;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/delete-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>								
+				
+				<div id='searchArt' style='position:absolute; left: -190px; top: -5px; display:none;white-space: nowrap'>
+				<input style="width:120px;" type="search" id="searchArt" name="searchArt" autofocus></div>
+				
+				<!--input type='button' id='hideText' value='Hide Text' style='position:absolute;left:0px'-->
+				<!--input type='button' id='showText' value='Show Text' style='display:none; position:absolute;right:0px;'-->
+					
+			</div>
+		</div>
+
+	</div><!-- /header --> 
+			 
+	<div data-role="content" class="ui-content ui-body-noPadding">	
+		<iframe id="webArticlesHtml" class="iframeRender" style="width:100%; border:0 solid white;" src="http://aoreiamobile.aoreia.com/articless.php">
+			<html>
+				<head></head>
+				<body></body>
+			</html>
+		</iframe>
+	</div>
+	
+	<div data-role="panel" id="nav-panel5" data-display="overlay" data-position="left">
+			<ul data-role="listview" data-icon="false">
+			 <!--li data-icon="delete"-->
+			  <a class="closeMenu" style="display:none;" href="#" data-rel="close">Close</a>
+			 <!--/li-->
+			 <!--li data-role="list-divider">Share this page</li style="background-image: url('resources/img/new2/a-weekly_insight.png');background-repeat:no-repeat;background-size: 50px 50px;"-->
+			 <!--li><a class="excecute" data-excecute="settings" href="#settingHtml">My Settings</a></li-->
+			 <li><a class="excecute weekly"   href="#weeklyHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weekly Insight</a></li>
+			 <li><a class="excecute testi"    href="#testimonialsHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testimonials</a></li>
+			 <li><a class="excecute faq"      href="#faqHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAQ</a></li>
+			 <li><a class="excecute audio"    href="#audiosHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Audios</a></li>
+			 <li><a class="excecute store"    href="#storeHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Store</a></li>
+			 <li><a class="excecute video"    href="#videosHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Videos Books</a></li>
+			 <li><a class="excecute files"    href="#filesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</a></li>			 
+			 <li><a class="excecute article"  href="#articlesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Articles</a></li>
+			 <li><a class="excecute sponsors" href="#sponsorsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sponsors</a></li>
+			 <li><a class="excecute recent"   href="#recentHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recent Deals</a></li>
+			 <li><a class="excecute meeting"  href="#meetingsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meetings Archives</a></li>
+			 <li><a class="excecute contact"  href="#contactUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contacts Us</a></li>
+			 <li><a class="excecute about"    href="#aboutUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About Us</a></li>
+			 <li><a class="excecute legal"    href="#legalHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Legal</a></li>
+			 <li><a class="excecute glossary" href="#glossaryHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Glossary</a></li>
+			 <li><a class="excecute facebook" onclick="window.open('https://www.facebook.com/pages/Americas-Online-REIA-LLC/122993624562827?skip_nax_wizard=true','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facebook</a></li>
+			 <li><a class="excecute twitter"  onclick="window.open('https://twitter.com/AOREIA','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Twitter</a></li>
+			 <li><a class="excecute linkedin" onclick="window.open('http://www.linkedin.com/pub/americas-online-reia-llc/6a/933/928','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linkedin</a></li>
+			 <!--li><a class="excecute" data-excecute="managerSearch" href="javascript:void(0);">NewsLetters</a></li-->
+			</ul>
+	</div><!-- /panel -->
+ 
+</div>
+
+<div data-role="page" id="audiosHtml" style="background:#fff;">
+
+	<div data-role="header" data-position="fixed" style="background:#E98C40;">
+	
+	
+		<div class="ui-mini ui-btn-left ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/backk-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="articles" data-theme="b" href="/" data-rel="back">No text</a>
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/menu-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:5px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="articles" data-theme="b" href="#nav-panel6">No text</a>
+				<!--a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('resources/img/Save2.png');background-repeat:no-repeat;margin-left:-11px;background-position:center center;left:10%;" class="ui-btn ui-icon-save ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="main-Menu" data-theme="b" href="#save">No text</a-->
+			</div>
+		</div>
+	
+		<h3 class="ui-title" role="heading" aria-level="1" style="color:#0057A6;font-size:18px;"> Audios Books </h3>
+	
+		<div class="ui-mini ui-btn-right ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">				
+				<a id="hide5" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/search-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn  ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>
+				<a id="show5" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;display:none;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/delete-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>								
+				
+				<div id='searchAudios' style='position:absolute; left: -190px; top: -5px; display:none;white-space: nowrap'>
+				<input style="width:120px;" type="search" id="searchAudios" name="searchAudios" autofocus></div>
+				
+				<!--input type='button' id='hideText' value='Hide Text' style='position:absolute;left:0px'-->
+				<!--input type='button' id='showText' value='Show Text' style='display:none; position:absolute;right:0px;'-->
+					
+			</div>
+		</div>
+
+	</div><!-- /header --> 
+			 
+	<div data-role="content" class="ui-content ui-body-noPadding">	
+		<iframe id="webAudiosHtml" class="iframeRender" style="width:100%; border:0 solid white;" src="http://aoreiamobile.aoreia.com/audioss.php">
+			<html>
+				<head></head>
+				<body></body>
+			</html>
+		</iframe>
+	</div>
+	
+	<div data-role="panel" id="nav-panel6" data-display="overlay" data-position="left">
+			<ul data-role="listview" data-icon="false">
+			 <!--li data-icon="delete"-->
+			  <a class="closeMenu" style="display:none;" href="#" data-rel="close">Close</a>
+			 <!--/li-->
+			 <!--li data-role="list-divider">Share this page</li style="background-image: url('resources/img/new2/a-weekly_insight.png');background-repeat:no-repeat;background-size: 50px 50px;"-->
+			 <!--li><a class="excecute" data-excecute="settings" href="#settingHtml">My Settings</a></li-->
+			 <li><a class="excecute weekly"   href="#weeklyHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weekly Insight</a></li>
+			 <li><a class="excecute testi"    href="#testimonialsHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testimonials</a></li>
+			 <li><a class="excecute faq"      href="#faqHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAQ</a></li>
+			 <li><a class="excecute audio"    href="#audiosHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Audios</a></li>
+			 <li><a class="excecute store"    href="#storeHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Store</a></li>
+			 <li><a class="excecute video"    href="#videosHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Videos Books</a></li>
+			 <li><a class="excecute files"    href="#filesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</a></li>			 
+			 <li><a class="excecute article"  href="#articlesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Articles</a></li>
+			 <li><a class="excecute sponsors" href="#sponsorsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sponsors</a></li>
+			 <li><a class="excecute recent"   href="#recentHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recent Deals</a></li>
+			 <li><a class="excecute meeting"  href="#meetingsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meetings Archives</a></li>
+			 <li><a class="excecute contact"  href="#contactUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contacts Us</a></li>
+			 <li><a class="excecute about"    href="#aboutUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About Us</a></li>
+			 <li><a class="excecute legal"    href="#legalHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Legal</a></li>
+			 <li><a class="excecute glossary" href="#glossaryHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Glossary</a></li>
+			 <li><a class="excecute facebook" onclick="window.open('https://www.facebook.com/pages/Americas-Online-REIA-LLC/122993624562827?skip_nax_wizard=true','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facebook</a></li>
+			 <li><a class="excecute twitter"  onclick="window.open('https://twitter.com/AOREIA','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Twitter</a></li>
+			 <li><a class="excecute linkedin" onclick="window.open('http://www.linkedin.com/pub/americas-online-reia-llc/6a/933/928','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linkedin</a></li>
+			 <!--li><a class="excecute" data-excecute="managerSearch" href="javascript:void(0);">NewsLetters</a></li-->
+			</ul>
+	</div><!-- /panel -->
+ 
+</div>
+
+
+<div data-role="page" id="videosHtml" style="background:#fff;">
+
+	<div data-role="header" data-position="fixed" style="background:#E98C40;">
+	
+	
+		<div class="ui-mini ui-btn-left ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/backk-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="videos" data-theme="b" href="#videosHtml" data-rel="back" id="backVideo">No text</a>
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/menu-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:5px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="videos" data-theme="b" href="#nav-panel7">No text</a>
+				<!--a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('resources/img/Save2.png');background-repeat:no-repeat;margin-left:-11px;background-position:center center;left:10%;" class="ui-btn ui-icon-save ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="main-Menu" data-theme="b" href="#save">No text</a-->
+			</div>
+		</div>
+	
+		<h3 class="ui-title" role="heading" aria-level="1" style="color:#0057A6;font-size:18px;"> Videos </h3>
+	
+		<div class="ui-mini ui-btn-right ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">				
+				<a id="hide6" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/search-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn  ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>
+				<a id="show6" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;display:none;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/delete-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>								
+				
+				<div id='searchVideos' style='position:absolute; left: -190px; top: -5px; display:none;white-space: nowrap'>
+				<input style="width:120px;" type="search" id="searchVideos" name="searchVideos" autofocus></div>
+				
+				<!--input type='button' id='hideText' value='Hide Text' style='position:absolute;left:0px'-->
+				<!--input type='button' id='showText' value='Show Text' style='display:none; position:absolute;right:0px;'-->
+					
+			</div>
+		</div>
+
+	</div><!-- /header --> 
+			 
+	<div data-role="content" class="ui-content ui-body-noPadding">	
+		<iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" frameborder = 0
+		id="webVideosHtml" class="iframeRender" style="width:100%; border:0 solid white;" 
+		src="http://aoreiamobile.aoreia.com/videoss.php">
+			<html>
+				<head></head>
+				<body></body>
+			</html>
+		</iframe>
+	</div>
+	
+	<div data-role="panel" id="nav-panel7" data-display="overlay" data-position="left">
+			<ul data-role="listview" data-icon="false">
+			 <!--li data-icon="delete"-->
+			  <a class="closeMenu" style="display:none;" href="#" data-rel="close">Close</a>
+			 <!--/li-->
+			 <!--li data-role="list-divider">Share this page</li style="background-image: url('resources/img/new2/a-weekly_insight.png');background-repeat:no-repeat;background-size: 50px 50px;"-->
+			 <!--li><a class="excecute" data-excecute="settings" href="#settingHtml">My Settings</a></li-->
+			 <li><a class="excecute weekly"   href="#weeklyHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weekly Insight</a></li>
+			 <li><a class="excecute testi"    href="#testimonialsHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testimonials</a></li>
+			 <li><a class="excecute faq"      href="#faqHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAQ</a></li>
+			 <li><a class="excecute audio"    href="#audiosHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Audios</a></li>
+			 <li><a class="excecute store"    href="#storeHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Store</a></li>
+			 <li><a class="excecute video"    href="#videosHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Videos Books</a></li>
+			 <li><a class="excecute files"    href="#filesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</a></li>			 
+			 <li><a class="excecute article"  href="#articlesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Articles</a></li>
+			 <li><a class="excecute sponsors" href="#sponsorsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sponsors</a></li>
+			 <li><a class="excecute recent"   href="#recentHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recent Deals</a></li>
+			 <li><a class="excecute meeting"  href="#meetingsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meetings Archives</a></li>
+			 <li><a class="excecute contact"  href="#contactUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contacts Us</a></li>
+			 <li><a class="excecute about"    href="#aboutUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About Us</a></li>
+			 <li><a class="excecute legal"    href="#legalHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Legal</a></li>
+			 <li><a class="excecute glossary" href="#glossaryHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Glossary</a></li>
+			 <li><a class="excecute facebook" onclick="window.open('https://www.facebook.com/pages/Americas-Online-REIA-LLC/122993624562827?skip_nax_wizard=true','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facebook</a></li>
+			 <li><a class="excecute twitter"  onclick="window.open('https://twitter.com/AOREIA','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Twitter</a></li>
+			 <li><a class="excecute linkedin" onclick="window.open('http://www.linkedin.com/pub/americas-online-reia-llc/6a/933/928','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linkedin</a></li>
+			 <!--li><a class="excecute" data-excecute="managerSearch" href="javascript:void(0);">NewsLetters</a></li-->
+			</ul>
+	</div><!-- /panel -->
+ 
+</div>
+
+<div data-role="page" id="filesHtml" style="background:#fff;">
+
+	<div data-role="header" data-position="fixed" style="background:#E98C40;">
+	
+	
+		<div class="ui-mini ui-btn-left ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/backk-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="files" data-theme="b" href="/" data-rel="back">No text</a>
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/menu-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:5px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="files" data-theme="b" href="#nav-panel8">No text</a>
+				<!--a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('resources/img/Save2.png');background-repeat:no-repeat;margin-left:-11px;background-position:center center;left:10%;" class="ui-btn ui-icon-save ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="main-Menu" data-theme="b" href="#save">No text</a-->
+			</div>
+		</div>
+	
+		<h3 class="ui-title" role="heading" aria-level="1" style="color:#0057A6;font-size:18px;"> Files </h3>
+	
+		<div class="ui-mini ui-btn-right ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">				
+				<a id="hide7" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/search-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn  ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>
+				<a id="show7" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;display:none;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/delete-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>								
+				
+				<div id='searchFiles' style='position:absolute; left: -190px; top: -5px; display:none;white-space: nowrap'>
+				<input style="width:120px;" type="search" id="searchFiles" name="searchFiles" autofocus></div>
+				
+				<!--input type='button' id='hideText' value='Hide Text' style='position:absolute;left:0px'-->
+				<!--input type='button' id='showText' value='Show Text' style='display:none; position:absolute;right:0px;'-->
+					
+			</div>
+		</div>
+
+	</div><!-- /header --> 
+			 
+	<div data-role="content" class="ui-content ui-body-noPadding">	
+		<iframe id="webFilesHtml" class="iframeRender" style="width:100%; border:1px solid white;" src="http://aoreiamobile.aoreia.com/filess.php">
+			<html>
+				<head></head>
+				<body></body>
+			</html>
+		</iframe>
+	</div>
+	
+	<div data-role="panel" id="nav-panel7" data-display="overlay" data-position="left">
+			<ul data-role="listview" data-icon="false">
+			 <!--li data-icon="delete"-->
+			  <a class="closeMenu" style="display:none;" href="#" data-rel="close">Close</a>
+			 <!--/li-->
+			 <!--li data-role="list-divider">Share this page</li style="background-image: url('resources/img/new2/a-weekly_insight.png');background-repeat:no-repeat;background-size: 50px 50px;"-->
+			 <!--li><a class="excecute" data-excecute="settings" href="#settingHtml">My Settings</a></li-->
+			 <li><a class="excecute weekly"   href="#weeklyHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weekly Insight</a></li>
+			 <li><a class="excecute testi"    href="#testimonialsHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testimonials</a></li>
+			 <li><a class="excecute faq"      href="#faqHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAQ</a></li>
+			 <li><a class="excecute audio"    href="#audiosHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Audios</a></li>
+			 <li><a class="excecute store"    href="#storeHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Store</a></li>
+			 <li><a class="excecute video"    href="#videosHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Videos Books</a></li>
+			 <li><a class="excecute files"    href="#filesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</a></li>			 
+			 <li><a class="excecute article"  href="#articlesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Articles</a></li>
+			 <li><a class="excecute sponsors" href="#sponsorsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sponsors</a></li>
+			 <li><a class="excecute recent"   href="#recentHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recent Deals</a></li>
+			 <li><a class="excecute meeting"  href="#meetingsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meetings Archives</a></li>
+			 <li><a class="excecute contact"  href="#contactUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contacts Us</a></li>
+			 <li><a class="excecute about"    href="#aboutUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About Us</a></li>
+			 <li><a class="excecute legal"    href="#legalHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Legal</a></li>
+			 <li><a class="excecute glossary" href="#glossaryHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Glossary</a></li>
+			 <li><a class="excecute facebook" onclick="window.open('https://www.facebook.com/pages/Americas-Online-REIA-LLC/122993624562827?skip_nax_wizard=true','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facebook</a></li>
+			 <li><a class="excecute twitter"  onclick="window.open('https://twitter.com/AOREIA','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Twitter</a></li>
+			 <li><a class="excecute linkedin" onclick="window.open('http://www.linkedin.com/pub/americas-online-reia-llc/6a/933/928','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linkedin</a></li>
+			 <!--li><a class="excecute" data-excecute="managerSearch" href="javascript:void(0);">NewsLetters</a></li-->
+			</ul>
+	</div><!-- /panel -->
+ 
+</div>
+
+<div data-role="page" id="recentHtml" style="background:#fff;">
+
+	<div data-role="header" data-position="fixed" style="background:#E98C40;">
+	
+	
+		<div class="ui-mini ui-btn-left ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/backk-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="recent" data-theme="b" href="/" data-rel="back">No text</a>
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/menu-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:5px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="recent" data-theme="b" href="#nav-panel9">No text</a>
+				<!--a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('resources/img/Save2.png');background-repeat:no-repeat;margin-left:-11px;background-position:center center;left:10%;" class="ui-btn ui-icon-save ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="main-Menu" data-theme="b" href="#save">No text</a-->
+			</div>
+		</div>
+	
+		<h3 class="ui-title" role="heading" aria-level="1" style="color:#0057A6;font-size:18px;"> Recent Deals </h3>
+	
+		<div class="ui-mini ui-btn-right ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">				
+				<a id="hide8" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/search-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn  ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>
+				<a id="show8" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;display:none;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/delete-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>								
+				
+				<div id='searchRec' style='position:absolute; left: -190px; top: -5px; display:none;white-space: nowrap'>
+				<input style="width:120px;" type="search" id="searchRec" name="searchRec" autofocus></div>
+				
+				<!--input type='button' id='hideText' value='Hide Text' style='position:absolute;left:0px'-->
+				<!--input type='button' id='showText' value='Show Text' style='display:none; position:absolute;right:0px;'-->
+					
+			</div>
+		</div>
+
+	</div><!-- /header --> 
+			 
+	<div data-role="content" class="ui-content ui-body-noPadding">	
+		<iframe id="webRecentHtml" class="iframeRender" style="width:100%; border:0 solid white;" src="http://aoreiamobile.aoreia.com/recent.php">
+			<html>
+				<head></head>
+				<body></body>
+			</html>
+		</iframe>
+	</div>
+	
+	<div data-role="panel" id="nav-panel9" data-display="overlay" data-position="left">
+			<ul data-role="listview" data-icon="false">
+			 <!--li data-icon="delete"-->
+			  <a class="closeMenu" style="display:none;" href="#" data-rel="close">Close</a>
+			 <!--/li-->
+			 <!--li data-role="list-divider">Share this page</li style="background-image: url('resources/img/new2/a-weekly_insight.png');background-repeat:no-repeat;background-size: 50px 50px;"-->
+			 <!--li><a class="excecute" data-excecute="settings" href="#settingHtml">My Settings</a></li-->
+			 <li><a class="excecute weekly"   href="#weeklyHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weekly Insight</a></li>
+			 <li><a class="excecute testi"    href="#testimonialsHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testimonials</a></li>
+			 <li><a class="excecute faq"      href="#faqHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAQ</a></li>
+			 <li><a class="excecute audio"    href="#audiosHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Audios</a></li>
+			 <li><a class="excecute store"    href="#storeHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Store</a></li>
+			 <li><a class="excecute video"    href="#videosHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Videos Books</a></li>
+			 <li><a class="excecute files"    href="#filesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</a></li>			 
+			 <li><a class="excecute article"  href="#articlesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Articles</a></li>
+			 <li><a class="excecute sponsors" href="#sponsorsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sponsors</a></li>
+			 <li><a class="excecute recent"   href="#recentHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recent Deals</a></li>
+			 <li><a class="excecute meeting"  href="#meetingsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meetings Archives</a></li>
+			 <li><a class="excecute contact"  href="#contactUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contacts Us</a></li>
+			 <li><a class="excecute about"    href="#aboutUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About Us</a></li>
+			 <li><a class="excecute legal"    href="#legalHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Legal</a></li>
+			 <li><a class="excecute glossary" href="#glossaryHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Glossary</a></li>
+			 <li><a class="excecute facebook" onclick="window.open('https://www.facebook.com/pages/Americas-Online-REIA-LLC/122993624562827?skip_nax_wizard=true','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facebook</a></li>
+			 <li><a class="excecute twitter"  onclick="window.open('https://twitter.com/AOREIA','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Twitter</a></li>
+			 <li><a class="excecute linkedin" onclick="window.open('http://www.linkedin.com/pub/americas-online-reia-llc/6a/933/928','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linkedin</a></li>
+			 <!--li><a class="excecute" data-excecute="managerSearch" href="javascript:void(0);">NewsLetters</a></li-->
+			</ul>
+	</div><!-- /panel -->
+ 
+</div>
+
+<div data-role="page" id="meetingsHtml" style="background:#fff;">
+
+	<div data-role="header" data-position="fixed" style="background:#E98C40;">
+	
+	
+		<div class="ui-mini ui-btn-left ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/backk-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="meetings" data-theme="b" href="/" data-rel="back">No text</a>
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/menu-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:5px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="meetings" data-theme="b" href="#nav-panel10">No text</a>
+				<!--a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('resources/img/Save2.png');background-repeat:no-repeat;margin-left:-11px;background-position:center center;left:10%;" class="ui-btn ui-icon-save ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="main-Menu" data-theme="b" href="#save">No text</a-->
+			</div>
+		</div>
+	
+		<h3 class="ui-title" role="heading" aria-level="1" style="color:#0057A6;font-size:18px;"> Meetings Archives </h3>
+	
+		<div class="ui-mini ui-btn-right ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">				
+				<a id="hide9" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/search-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn  ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>
+				<a id="show9" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;display:none;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/delete-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>								
+				
+				<div id='searchMeet' style='position:absolute; left: -190px; top: -5px; display:none;white-space: nowrap'>
+				<input style="width:120px;" type="search" id="searchMeet" name="searchMeet" autofocus></div>
+				
+				<!--input type='button' id='hideText' value='Hide Text' style='position:absolute;left:0px'-->
+				<!--input type='button' id='showText' value='Show Text' style='display:none; position:absolute;right:0px;'-->
+					
+			</div>
+		</div>
+
+	</div><!-- /header --> 
+			 
+	<div data-role="content" class="ui-content ui-body-noPadding">	
+		<iframe id="webMeetingHtml" class="iframeRender" style="width:100%; border:0 solid white;" src="http://aoreiamobile.aoreia.com/meetings.php">
+			<html>
+				<head></head>
+				<body></body>
+			</html>
+		</iframe>
+	</div>
+	
+	<div data-role="panel" id="nav-panel10" data-display="overlay" data-position="left">
+			<ul data-role="listview" data-icon="false">
+			 <!--li data-icon="delete"-->
+			  <a class="closeMenu" style="display:none;" href="#" data-rel="close">Close</a>
+			 <!--/li-->
+			 <!--li data-role="list-divider">Share this page</li style="background-image: url('resources/img/new2/a-weekly_insight.png');background-repeat:no-repeat;background-size: 50px 50px;"-->
+			 <!--li><a class="excecute" data-excecute="settings" href="#settingHtml">My Settings</a></li-->
+			 <li><a class="excecute weekly"   href="#weeklyHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weekly Insight</a></li>
+			 <li><a class="excecute testi"    href="#testimonialsHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testimonials</a></li>
+			 <li><a class="excecute faq"      href="#faqHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAQ</a></li>
+			 <li><a class="excecute audio"    href="#audiosHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Audios</a></li>
+			 <li><a class="excecute store"    href="#storeHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Store</a></li>
+			 <li><a class="excecute video"    href="#videosHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Videos Books</a></li>
+			 <li><a class="excecute files"    href="#filesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</a></li>			 
+			 <li><a class="excecute article"  href="#articlesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Articles</a></li>
+			 <li><a class="excecute sponsors" href="#sponsorsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sponsors</a></li>
+			 <li><a class="excecute recent"   href="#recentHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recent Deals</a></li>
+			 <li><a class="excecute meeting"  href="#meetingsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meetings Archives</a></li>
+			 <li><a class="excecute contact"  href="#contactUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contacts Us</a></li>
+			 <li><a class="excecute about"    href="#aboutUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About Us</a></li>
+			 <li><a class="excecute legal"    href="#legalHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Legal</a></li>
+			 <li><a class="excecute glossary" href="#glossaryHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Glossary</a></li>
+			 <li><a class="excecute facebook" onclick="window.open('https://www.facebook.com/pages/Americas-Online-REIA-LLC/122993624562827?skip_nax_wizard=true','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facebook</a></li>
+			 <li><a class="excecute twitter"  onclick="window.open('https://twitter.com/AOREIA','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Twitter</a></li>
+			 <li><a class="excecute linkedin" onclick="window.open('http://www.linkedin.com/pub/americas-online-reia-llc/6a/933/928','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linkedin</a></li>
+			 <!--li><a class="excecute" data-excecute="managerSearch" href="javascript:void(0);">NewsLetters</a></li-->
+			</ul>
+	</div><!-- /panel -->
+ 
+</div>
+
+<div data-role="page" id="glossaryHtml" style="background:#fff;">
+
+	<div data-role="header" data-position="fixed" style="background:#E98C40;">
+	
+	
+		<div class="ui-mini ui-btn-left ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/backk-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="glossary" data-theme="b" href="/" data-rel="back">No text</a>
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/menu-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:5px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="glossary" data-theme="b" href="#nav-panel13">No text</a>
+				<!--a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('resources/img/Save2.png');background-repeat:no-repeat;margin-left:-11px;background-position:center center;left:10%;" class="ui-btn ui-icon-save ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="main-Menu" data-theme="b" href="#save">No text</a-->
+			</div>
+		</div>
+	
+		<h3 class="ui-title" role="heading" aria-level="1" style="color:#0057A6;font-size:18px;"> Glossary  </h3>
+	
+		<div class="ui-mini ui-btn-right ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">				
+				<a id="hide12" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/search-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn  ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>
+				<a id="show12" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;display:none;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/delete-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>								
+				
+				<div id='searchGlossary' style='position:absolute; left: -190px; top: -5px; display:none;white-space: nowrap'>
+				<input style="width:120px;" type="text" id="searchGlossary" name="searchGlossary"></div>
+				
+				<!--input type='button' id='hideText' value='Hide Text' style='position:absolute;left:0px'-->
+				<!--input type='button' id='showText' value='Show Text' style='display:none; position:absolute;right:0px;'-->
+					
+			</div>
+		</div>
+
+	</div><!-- /header --> 
+	
+	<div data-role="content" class="ui-content ui-body-noPadding">	
+			<iframe id="webGlossaryHtml" class="iframeRender" style="width:100%; border:0 solid white;" src="http://aoreiamobile.aoreia.com/glossary.php">
+				<html>
+					<head></head>
+					<body></body>
+				</html>
+			</iframe>
+	</div>
+	
+	<div data-role="panel" id="nav-panel13" data-display="overlay" data-position="left">
+			<ul data-role="listview" data-icon="false">
+			 <!--li data-icon="delete"-->
+			  <a class="closeMenu" style="display:none;" href="#" data-rel="close">Close</a>
+			 <!--/li-->
+			 <!--li data-role="list-divider">Share this page</li style="background-image: url('resources/img/new2/a-weekly_insight.png');background-repeat:no-repeat;background-size: 50px 50px;"-->
+			 <!--li><a class="excecute" data-excecute="settings" href="#settingHtml">My Settings</a></li-->
+			 <li><a class="excecute weekly"   href="#weeklyHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weekly Insight</a></li>
+			 <li><a class="excecute testi"    href="#testimonialsHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testimonials</a></li>
+			 <li><a class="excecute faq"      href="#faqHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAQ</a></li>
+			 <li><a class="excecute audio"    href="#audiosHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Audios</a></li>
+			 <li><a class="excecute store"    href="#storeHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Store</a></li>
+			 <li><a class="excecute video"    href="#videosHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Videos Books</a></li>
+			 <li><a class="excecute files"    href="#filesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</a></li>			 
+			 <li><a class="excecute article"  href="#articlesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Articles</a></li>
+			 <li><a class="excecute sponsors" href="#sponsorsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sponsors</a></li>
+			 <li><a class="excecute recent"   href="#recentHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recent Deals</a></li>
+			 <li><a class="excecute meeting"  href="#meetingsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meetings Archives</a></li>
+			 <li><a class="excecute contact"  href="#contactUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contacts Us</a></li>
+			 <li><a class="excecute about"    href="#aboutUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About Us</a></li>
+			 <li><a class="excecute legal"    href="#legalHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Legal</a></li>
+			 <li><a class="excecute glossary" href="#glossaryHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Glossary</a></li>
+			 <li><a class="excecute facebook" onclick="window.open('https://www.facebook.com/pages/Americas-Online-REIA-LLC/122993624562827?skip_nax_wizard=true','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facebook</a></li>
+			 <li><a class="excecute twitter"  onclick="window.open('https://twitter.com/AOREIA','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Twitter</a></li>
+			 <li><a class="excecute linkedin" onclick="window.open('http://www.linkedin.com/pub/americas-online-reia-llc/6a/933/928','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linkedin</a></li>
+			 <!--li><a class="excecute" data-excecute="managerSearch" href="javascript:void(0);">NewsLetters</a></li-->
+			</ul>
+	</div><!-- /panel -->
+ 
+</div>
+
+<div data-role="page" id="legalHtml" style="background:#fff;">
+
+	<div data-role="header" data-position="fixed" style="background:#E98C40;">
+	
+	
+		<div class="ui-mini ui-btn-left ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/backk-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="legal" data-theme="b" href="/" data-rel="back">No text</a>
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/menu-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:5px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="legal" data-theme="b" href="#nav-panel14">No text</a>
+				<!--a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('resources/img/Save2.png');background-repeat:no-repeat;margin-left:-11px;background-position:center center;left:10%;" class="ui-btn ui-icon-save ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="main-Menu" data-theme="b" href="#save">No text</a-->
+			</div>
+		</div>
+	
+		<h3 class="ui-title" role="heading" aria-level="1" style="color:#0057A6;font-size:18px;"> Legal  </h3>
+	
+		<div class="ui-mini ui-btn-right ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">				
+				<a id="hide13" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/search-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn  ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>
+				<a id="show13" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;display:none;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/delete-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>								
+				
+				<div id='searchLegal' style='position:absolute; left: -190px; top: -5px; display:none;white-space: nowrap'>
+				<input style="width:120px;" type="text" id="searchLegal" name="searchLegal"></div>
+				
+				<!--input type='button' id='hideText' value='Hide Text' style='position:absolute;left:0px'-->
+				<!--input type='button' id='showText' value='Show Text' style='display:none; position:absolute;right:0px;'-->
+					
+			</div>
+		</div>
+
+	</div><!-- /header --> 
+	
+	<div data-role="content" class="ui-content ui-body-noPadding">	
+			<iframe id="webLegalHtml" class="iframeRender" style="width:100%; border:0 solid white;" src="http://aoreiamobile.aoreia.com/legal.php">
+				<html>
+					<head></head>
+					<body></body>
+				</html>
+			</iframe>
+	</div>
+	
+	<div data-role="panel" id="nav-panel14" data-display="overlay" data-position="left">
+			<ul data-role="listview" data-icon="false">
+			 <!--li data-icon="delete"-->
+			  <a class="closeMenu" style="display:none;" href="#" data-rel="close">Close</a>
+			 <!--/li-->
+			 <!--li data-role="list-divider">Share this page</li style="background-image: url('resources/img/new2/a-weekly_insight.png');background-repeat:no-repeat;background-size: 50px 50px;"-->
+			 <!--li><a class="excecute" data-excecute="settings" href="#settingHtml">My Settings</a></li-->
+			 <li><a class="excecute weekly"   href="#weeklyHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weekly Insight</a></li>
+			 <li><a class="excecute testi"    href="#testimonialsHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testimonials</a></li>
+			 <li><a class="excecute faq"      href="#faqHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAQ</a></li>
+			 <li><a class="excecute audio"    href="#audiosHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Audios</a></li>
+			 <li><a class="excecute store"    href="#storeHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Store</a></li>
+			 <li><a class="excecute video"    href="#videosHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Videos Books</a></li>
+			 <li><a class="excecute files"    href="#filesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</a></li>			 
+			 <li><a class="excecute article"  href="#articlesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Articles</a></li>
+			 <li><a class="excecute sponsors" href="#sponsorsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sponsors</a></li>
+			 <li><a class="excecute recent"   href="#recentHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recent Deals</a></li>
+			 <li><a class="excecute meeting"  href="#meetingsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meetings Archives</a></li>
+			 <li><a class="excecute contact"  href="#contactUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contacts Us</a></li>
+			 <li><a class="excecute about"    href="#aboutUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About Us</a></li>
+			 <li><a class="excecute legal"    href="#legalHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Legal</a></li>
+			 <li><a class="excecute glossary" href="#glossaryHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Glossary</a></li>
+			 <li><a class="excecute facebook" onclick="window.open('https://www.facebook.com/pages/Americas-Online-REIA-LLC/122993624562827?skip_nax_wizard=true','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facebook</a></li>
+			 <li><a class="excecute twitter"  onclick="window.open('https://twitter.com/AOREIA','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Twitter</a></li>
+			 <li><a class="excecute linkedin" onclick="window.open('http://www.linkedin.com/pub/americas-online-reia-llc/6a/933/928','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linkedin</a></li>
+			 <!--li><a class="excecute" data-excecute="managerSearch" href="javascript:void(0);">NewsLetters</a></li-->
+			</ul>
+	</div><!-- /panel -->
+ 
+</div>
+
+<div data-role="page" id="contactUsHtml" style="background:#fff;">
+
+	<div data-role="header" data-position="fixed" style="background:#E98C40;">
+	
+	
+		<div class="ui-mini ui-btn-left ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/backk-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="contacts" data-theme="b" href="/" data-rel="back">No text</a>
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/menu-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:5px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="contacts" data-theme="b" href="#nav-panel11">No text</a>
+				<!--a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('resources/img/Save2.png');background-repeat:no-repeat;margin-left:-11px;background-position:center center;left:10%;" class="ui-btn ui-icon-save ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="main-Menu" data-theme="b" href="#save">No text</a-->
+			</div>
+		</div>
+	
+		<h3 class="ui-title" role="heading" aria-level="1" style="color:#0057A6;font-size:18px;"> Contact Us  </h3>
+	
+		<div class="ui-mini ui-btn-right ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">				
+				<a id="saveContactUs" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/save-36.png');background-repeat:no-repeat;background-size: 20px 20px;margin-left:-18px;margin-top:3px;background-position:center center;left:30%;" class="ui-btn ui-icon-save ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="main-Menu" data-theme="b" href="javascript:void(0);">No text</a>			
+				<!--a id="hide10" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/search-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn  ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>
+				<a id="show10" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;display:none;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/delete-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a-->								
+				
+				<!--div id='searchContact' style='position:absolute; left: -190px; top: -5px; display:none;white-space: nowrap'>
+				<input style="width:120px;" type="text" id="searchContact" name="searchContact"-->
+				<!--a id="saveContactUs" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/save-36.png');background-repeat:no-repeat;background-size: 20px 20px;margin-left:-18px;margin-top:3px;background-position:center center;left:30%;" class="ui-btn ui-icon-save ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="main-Menu" data-theme="b" href="javascript:void(0);">No text</a>
+				</div-->
+				
+				<!--input type='button' id='hideText' value='Hide Text' style='position:absolute;left:0px'-->
+				<!--input type='button' id='showText' value='Show Text' style='display:none; position:absolute;right:0px;'-->
+					
+			</div>
+		</div>
+
+	</div><!-- /header --> 
+	
+	<div data-role="content" class="ui-content ui-body-noPadding">	
+			<iframe id="webContactsHtml" class="iframeRender" style="width:100%; border:0 solid white;" src="http://aoreiamobile.aoreia.com/contactus.php">
+				<html>
+					<head></head>
+					<body></body>
+				</html>
+			</iframe>
+	</div>	
+	
+	
+	<div data-role="panel" id="nav-panel11" data-display="overlay" data-position="left">
+			<ul data-role="listview" data-icon="false">
+			 <!--li data-icon="delete"-->
+			  <a class="closeMenu" style="display:none;" href="#" data-rel="close">Close</a>
+			 <!--/li-->
+			 <!--li data-role="list-divider">Share this page</li style="background-image: url('resources/img/new2/a-weekly_insight.png');background-repeat:no-repeat;background-size: 50px 50px;"-->
+			 <!--li><a class="excecute" data-excecute="settings" href="#settingHtml">My Settings</a></li-->
+			 <li><a class="excecute weekly"   href="#weeklyHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weekly Insight</a></li>
+			 <li><a class="excecute testi"    href="#testimonialsHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testimonials</a></li>
+			 <li><a class="excecute faq"      href="#faqHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAQ</a></li>
+			 <li><a class="excecute audio"    href="#audiosHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Audios</a></li>
+			 <li><a class="excecute store"    href="#storeHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Store</a></li>
+			 <li><a class="excecute video"    href="#videosHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Videos Books</a></li>
+			 <li><a class="excecute files"    href="#filesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</a></li>			 
+			 <li><a class="excecute article"  href="#articlesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Articles</a></li>
+			 <li><a class="excecute sponsors" href="#sponsorsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sponsors</a></li>
+			 <li><a class="excecute recent"   href="#recentHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recent Deals</a></li>
+			 <li><a class="excecute meeting"  href="#meetingsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meetings Archives</a></li>
+			 <li><a class="excecute contact"  href="#contactUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contacts Us</a></li>
+			 <li><a class="excecute about"    href="#aboutUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About Us</a></li>
+			 <li><a class="excecute legal"    href="#legalHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Legal</a></li>
+			 <li><a class="excecute glossary" href="#glossaryHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Glossary</a></li>
+			 <li><a class="excecute facebook" onclick="window.open('https://www.facebook.com/pages/Americas-Online-REIA-LLC/122993624562827?skip_nax_wizard=true','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facebook</a></li>
+			 <li><a class="excecute twitter"  onclick="window.open('https://twitter.com/AOREIA','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Twitter</a></li>
+			 <li><a class="excecute linkedin" onclick="window.open('http://www.linkedin.com/pub/americas-online-reia-llc/6a/933/928','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linkedin</a></li>
+			 <!--li><a class="excecute" data-excecute="managerSearch" href="javascript:void(0);">NewsLetters</a></li-->
+			</ul>
+	</div><!-- /panel -->
+	
+ 
+</div>
+
+<div data-role="page" id="aboutUsHtml" style="background:#fff;">
+
+	<div data-role="header" data-position="fixed" style="background:#E98C40;">
+	
+	
+		<div class="ui-mini ui-btn-left ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/backk-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="about" data-theme="b" href="/" data-rel="back">No text</a>
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/menu-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:5px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="about" data-theme="b" href="#nav-panel12">No text</a>
+				<!--a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('resources/img/Save2.png');background-repeat:no-repeat;margin-left:-11px;background-position:center center;left:10%;" class="ui-btn ui-icon-save ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="main-Menu" data-theme="b" href="#save">No text</a-->
+			</div>
+		</div>
+	
+		<h3 class="ui-title" role="heading" aria-level="1" style="color:#0057A6;font-size:18px;"> About Us  </h3>
+	
+		<div class="ui-mini ui-btn-right ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">				
+				<a id="hide11" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/search-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn  ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>
+				<a id="show11" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;display:none;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/delete-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>								
+				
+				<div id='searchAbout' style='position:absolute; left: -190px; top: -5px; display:none;white-space: nowrap'>
+				<!--input style="width:120px;" type="text" id="searchAbout" name="searchAbout"-->
+				
+				
+				</div>
+				
+				<!--input type='button' id='hideText' value='Hide Text' style='position:absolute;left:0px'-->
+				<!--input type='button' id='showText' value='Show Text' style='display:none; position:absolute;right:0px;'-->
+					
+			</div>
+		</div>
+
+	</div><!-- /header --> 
+	
+	<div data-role="content" class="ui-content ui-body-noPadding">	
+			<iframe id="webAboutHtml" class="iframeRender" style="width:100%; border:0 solid white;" src="http://aoreiamobile.aoreia.com/aboutus.php">
+				<html>
+					<head></head>
+					<body></body>
+				</html>
+			</iframe>
+	</div>
+	
+	<div data-role="panel" id="nav-panel12" data-display="overlay" data-position="left">
+			<ul data-role="listview" data-icon="false">
+			 <!--li data-icon="delete"-->
+			  <a class="closeMenu" style="display:none;" href="#" data-rel="close">Close</a>
+			 <!--/li-->
+			 <!--li data-role="list-divider">Share this page</li style="background-image: url('resources/img/new2/a-weekly_insight.png');background-repeat:no-repeat;background-size: 50px 50px;"-->
+			 <!--li><a class="excecute" data-excecute="settings" href="#settingHtml">My Settings</a></li-->
+			 <li><a class="excecute weekly"   href="#weeklyHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weekly Insight</a></li>
+			 <li><a class="excecute testi"    href="#testimonialsHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testimonials</a></li>
+			 <li><a class="excecute faq"      href="#faqHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAQ</a></li>
+			 <li><a class="excecute audio"    href="#audiosHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Audios</a></li>
+			 <li><a class="excecute store"    href="#storeHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Store</a></li>
+			 <li><a class="excecute video"    href="#videosHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Videos Books</a></li>
+			 <li><a class="excecute files"    href="#filesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</a></li>			 
+			 <li><a class="excecute article"  href="#articlesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Articles</a></li>
+			 <li><a class="excecute sponsors" href="#sponsorsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sponsors</a></li>
+			 <li><a class="excecute recent"   href="#recentHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recent Deals</a></li>
+			 <li><a class="excecute meeting"  href="#meetingsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meetings Archives</a></li>
+			 <li><a class="excecute contact"  href="#contactUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contacts Us</a></li>
+			 <li><a class="excecute about"    href="#aboutUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About Us</a></li>
+			 <li><a class="excecute legal"    href="#legalHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Legal</a></li>
+			 <li><a class="excecute glossary" href="#glossaryHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Glossary</a></li>
+			 <li><a class="excecute facebook" onclick="window.open('https://www.facebook.com/pages/Americas-Online-REIA-LLC/122993624562827?skip_nax_wizard=true','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facebook</a></li>
+			 <li><a class="excecute twitter"  onclick="window.open('https://twitter.com/AOREIA','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Twitter</a></li>
+			 <li><a class="excecute linkedin" onclick="window.open('http://www.linkedin.com/pub/americas-online-reia-llc/6a/933/928','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linkedin</a></li>
+			 <!--li><a class="excecute" data-excecute="managerSearch" href="javascript:void(0);">NewsLetters</a></li-->
+			</ul>
+	</div><!-- /panel -->
+	
+ 
+</div>
+
+<div data-role="page" id="sponsorsHtml" style="background:#fff;">
+
+	<div data-role="header" data-position="fixed" style="background:#E98C40;">
+	
+	
+		<div class="ui-mini ui-btn-left ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/backk-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="sponsors" data-theme="b" href="/" data-rel="back">No text</a>
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/menu-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:5px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="sponsors" data-theme="b" href="#nav-panel15">No text</a>
+				<!--a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('resources/img/Save2.png');background-repeat:no-repeat;margin-left:-11px;background-position:center center;left:10%;" class="ui-btn ui-icon-save ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="main-Menu" data-theme="b" href="#save">No text</a-->
+			</div>
+		</div>
+	
+		<h3 class="ui-title" role="heading" aria-level="1" style="color:#0057A6;font-size:18px;"> Sponsors  </h3>
+	
+		<div class="ui-mini ui-btn-right ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">				
+				<a id="hide14" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/search-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn  ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>
+				<a id="show14" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;display:none;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/delete-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>								
+				
+				<div id='searchSponsors' style='position:absolute; left: -190px; top: -5px; display:none;white-space: nowrap'>
+				<input type="search" id="searchSponsors" name="searchSponsors"></div>
+				
+				<!--input type='button' id='hideText' value='Hide Text' style='position:absolute;left:0px'-->
+				<!--input type='button' id='showText' value='Show Text' style='display:none; position:absolute;right:0px;'-->
+					
+			</div>
+		</div>
+
+	</div><!-- /header --> 
+	
+	<div data-role="content" class="ui-content ui-body-noPadding">	
+			<iframe id="webSponsorsHtml" class="iframeRender" style=" height:700px;width:100%; border:0 solid white;" src="http://aoreiamobile.aoreia.com/prefervendors.php">
+				<html>
+					<head></head>
+					<body></body>
+				</html>
+			</iframe>
+	</div>
+	
+	<div data-role="panel" id="nav-panel15" data-display="overlay" data-position="left">
+			<ul data-role="listview" data-icon="false">
+			 <!--li data-icon="delete"-->
+			  <a class="closeMenu" style="display:none;" href="#" data-rel="close">Close</a>
+			 <!--/li-->
+			 <!--li data-role="list-divider">Share this page</li style="background-image: url('resources/img/new2/a-weekly_insight.png');background-repeat:no-repeat;background-size: 50px 50px;"-->
+			 <!--li><a class="excecute" data-excecute="settings" href="#settingHtml">My Settings</a></li-->
+			 <li><a class="excecute weekly"   href="#weeklyHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weekly Insight</a></li>
+			 <li><a class="excecute testi"    href="#testimonialsHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testimonials</a></li>
+			 <li><a class="excecute faq"      href="#faqHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAQ</a></li>
+			 <li><a class="excecute audio"    href="#audiosHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Audios</a></li>
+			 <li><a class="excecute store"    href="#storeHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Store</a></li>
+			 <li><a class="excecute video"    href="#videosHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Videos Books</a></li>
+			 <li><a class="excecute files"    href="#filesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</a></li>			 
+			 <li><a class="excecute article"  href="#articlesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Articles</a></li>
+			 <li><a class="excecute sponsors" href="#sponsorsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sponsors</a></li>
+			 <li><a class="excecute recent"   href="#recentHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recent Deals</a></li>
+			 <li><a class="excecute meeting"  href="#meetingsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meetings Archives</a></li>
+			 <li><a class="excecute contact"  href="#contactUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contacts Us</a></li>
+			 <li><a class="excecute about"    href="#aboutUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About Us</a></li>
+			 <li><a class="excecute legal"    href="#legalHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Legal</a></li>
+			 <li><a class="excecute glossary" href="#glossaryHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Glossary</a></li>
+			 <li><a class="excecute facebook" onclick="window.open('https://www.facebook.com/pages/Americas-Online-REIA-LLC/122993624562827?skip_nax_wizard=true','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facebook</a></li>
+			 <li><a class="excecute twitter"  onclick="window.open('https://twitter.com/AOREIA','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Twitter</a></li>
+			 <li><a class="excecute linkedin" onclick="window.open('http://www.linkedin.com/pub/americas-online-reia-llc/6a/933/928','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linkedin</a></li>
+			 <!--li><a class="excecute" data-excecute="managerSearch" href="javascript:void(0);">NewsLetters</a></li-->
+			</ul>
+	</div><!-- /panel -->
+ 
+</div>
+
+<div data-role="page" id="storeHtml" style="background:#fff;">
+
+	<div data-role="header" data-position="fixed" style="background:#E98C40;">
+	
+	
+		<div class="ui-mini ui-btn-left ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/backk-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-theme="b" href="/" data-rel="back">No text</a>
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/menu-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:5px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-theme="b" href="#nav-panel16">No text</a>
+				<!--a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('resources/img/Save2.png');background-repeat:no-repeat;margin-left:-11px;background-position:center center;left:10%;" class="ui-btn ui-icon-save ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="main-Menu" data-theme="b" href="#save">No text</a-->
+			</div>
+		</div>
+	
+		<h3 class="ui-title" role="heading" aria-level="1" style="color:#0057A6;font-size:18px;"> Store  </h3>
+	
+		<div class="ui-mini ui-btn-right ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">				
+				<a id="hide14" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/search-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn  ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>
+				<a id="show14" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;display:none;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/delete-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>								
+				
+				<div id='searchStore' style='position:absolute; left: -190px; top: -5px; display:none;white-space: nowrap'>
+				<input type="search" id="searchStore" name="searchStore"></div>
+				
+				<!--input type='button' id='hideText' value='Hide Text' style='position:absolute;left:0px'-->
+				<!--input type='button' id='showText' value='Show Text' style='display:none; position:absolute;right:0px;'-->
+					
+			</div>
+		</div>
+
+	</div><!-- /header --> 
+	
+	<div data-role="content" class="ui-content ui-body-noPadding">	
+			<iframe id="webStoreHtml" class="iframeRender" style=" height:700px;width:100%; border:0 solid white;" src="http://aoreiamobile.aoreia.com/tailsStore.php">
+				<html>
+					<head></head>
+					<body></body>
+				</html>
+			</iframe>
+	</div>
+	
+	<div data-role="panel" id="nav-panel16" data-display="overlay" data-position="left">
+			<ul data-role="listview" data-icon="false">
+			 <!--li data-icon="delete"-->
+			  <a class="closeMenu" style="display:none;" href="#" data-rel="close">Close</a>
+			 <!--/li-->
+			 <!--li data-role="list-divider">Share this page</li style="background-image: url('resources/img/new2/a-weekly_insight.png');background-repeat:no-repeat;background-size: 50px 50px;"-->
+			 <!--li><a class="excecute" data-excecute="settings" href="#settingHtml">My Settings</a></li-->
+			 <li><a class="excecute weekly"   href="#weeklyHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weekly Insight</a></li>
+			 <li><a class="excecute testi"    href="#testimonialsHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testimonials</a></li>
+			 <li><a class="excecute faq"      href="#faqHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAQ</a></li>
+			 <li><a class="excecute audio"    href="#audiosHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Audios</a></li>
+			 <li><a class="excecute store"    href="#storeHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Store</a></li>
+			 <li><a class="excecute video"    href="#videosHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Videos Books</a></li>
+			 <li><a class="excecute files"    href="#filesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</a></li>			 
+			 <li><a class="excecute article"  href="#articlesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Articles</a></li>
+			 <li><a class="excecute sponsors" href="#sponsorsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sponsors</a></li>
+			 <li><a class="excecute recent"   href="#recentHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recent Deals</a></li>
+			 <li><a class="excecute meeting"  href="#meetingsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meetings Archives</a></li>
+			 <li><a class="excecute contact"  href="#contactUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contacts Us</a></li>
+			 <li><a class="excecute about"    href="#aboutUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About Us</a></li>
+			 <li><a class="excecute legal"    href="#legalHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Legal</a></li>
+			 <li><a class="excecute glossary" href="#glossaryHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Glossary</a></li>
+			 <li><a class="excecute facebook" onclick="window.open('https://www.facebook.com/pages/Americas-Online-REIA-LLC/122993624562827?skip_nax_wizard=true','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facebook</a></li>
+			 <li><a class="excecute twitter"  onclick="window.open('https://twitter.com/AOREIA','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Twitter</a></li>
+			 <li><a class="excecute linkedin" onclick="window.open('http://www.linkedin.com/pub/americas-online-reia-llc/6a/933/928','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linkedin</a></li>
+			 <!--li><a class="excecute" data-excecute="managerSearch" href="javascript:void(0);">NewsLetters</a></li-->
+			</ul>
+	</div><!-- /panel -->
+ 
+</div>
+
+<div data-role="page" id="generalHtml" style="background:#fff;">
+
+	<div data-role="header" data-position="fixed" style="background:#E98C40;">
+	
+	
+		<div class="ui-mini ui-btn-left ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/backk-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="legal" data-theme="b" href="/" data-rel="back">No text</a>
+				<a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/menu-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:5px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="legal" data-theme="b" href="#nav-panel0">No text</a>
+				<!--a style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('resources/img/Save2.png');background-repeat:no-repeat;margin-left:-11px;background-position:center center;left:10%;" class="ui-btn ui-icon-save ui-btn-icon-notext excecute ui-first-child ui-last-child" data-excecute="main-Menu" data-theme="b" href="#save">No text</a-->
+			</div>
+		</div>
+	
+		<h3 class="ui-title" role="heading" aria-level="1" style="color:#0057A6;font-size:18px;"> Search General  </h3>
+	
+		<div class="ui-mini ui-btn-right ui-controlgroup ui-controlgroup-horizontal ui-corner-all" data-type="horizontal" data-role="controlgroup">
+			<div class="ui-controlgroup-controls ">				
+				<a id="hide0" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/search-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn  ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>
+				<a id="show0" style="background:#E98C40; border:1px solid #E98C40; background-color:#E98C40;display:none;background-image: url('http://aoreiamobile.aoreia.com/resources/img/icon/delete-36.png');background-repeat:no-repeat; background-size: 30px 30px; margin-left:-11px;margin-top:3px;background-position:center center;" class="ui-btn ui-btn-icon-notext ui-first-child ui-last-child" data-theme="a" href="javascript:void(0);">No text</a>								
+				
+				<div id='searchGeneral' style='position:absolute; left: -190px; top: -5px; display:none;white-space: nowrap'>
+				<input style="width:120px;" type="search" id="searchGeneral" name="searchGeneral"></div>
+				
+				<!--input type='button' id='hideText' value='Hide Text' style='position:absolute;left:0px'-->
+				<!--input type='button' id='showText' value='Show Text' style='display:none; position:absolute;right:0px;'-->
+					
+			</div>
+		</div>
+
+	</div><!-- /header --> 
+	
+	<div data-role="content" class="ui-content ui-body-noPadding">	
+			<iframe id="webGeneralHtml" class="iframeRender" style=" height:700px;width:100%; border:0 solid white;" src="http://aoreiamobile.aoreia.com/general.php">
+				<html>
+					<head></head>
+					<body></body>
+				</html>
+			</iframe>
+	</div>
+	
+	<div data-role="panel" id="nav-panel0" data-display="overlay" data-position="left">
+			<ul data-role="listview" data-icon="false">
+			 <!--li data-icon="delete"-->
+			  <a class="closeMenu" style="display:none;" href="#" data-rel="close">Close</a>
+			 <!--/li-->
+			 <!--li data-role="list-divider">Share this page</li style="background-image: url('resources/img/new2/a-weekly_insight.png');background-repeat:no-repeat;background-size: 50px 50px;"-->
+			 <!--li><a class="excecute" data-excecute="settings" href="#settingHtml">My Settings</a></li-->
+			 <li><a class="excecute weekly"   href="#weeklyHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weekly Insight</a></li>
+			 <li><a class="excecute testi"    href="#testimonialsHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testimonials</a></li>
+			 <li><a class="excecute faq"      href="#faqHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FAQ</a></li>
+			 <li><a class="excecute audio"    href="#audiosHtml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Audios</a></li>
+			 <li><a class="excecute store"    href="#storeHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Store</a></li>
+			 <li><a class="excecute video"    href="#videosHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Videos Books</a></li>
+			 <li><a class="excecute files"    href="#filesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</a></li>			 
+			 <li><a class="excecute article"  href="#articlesHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Articles</a></li>
+			 <li><a class="excecute sponsors" href="#sponsorsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sponsors</a></li>
+			 <li><a class="excecute recent"   href="#recentHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recent Deals</a></li>
+			 <li><a class="excecute meeting"  href="#meetingsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meetings Archives</a></li>
+			 <li><a class="excecute contact"  href="#contactUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contacts Us</a></li>
+			 <li><a class="excecute about"    href="#aboutUsHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About Us</a></li>
+			 <li><a class="excecute legal"    href="#legalHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Legal</a></li>
+			 <li><a class="excecute glossary" href="#glossaryHtml" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Glossary</a></li>
+			 <li><a class="excecute facebook" onclick="window.open('https://www.facebook.com/pages/Americas-Online-REIA-LLC/122993624562827?skip_nax_wizard=true','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facebook</a></li>
+			 <li><a class="excecute twitter"  onclick="window.open('https://twitter.com/AOREIA','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Twitter</a></li>
+			 <li><a class="excecute linkedin" onclick="window.open('http://www.linkedin.com/pub/americas-online-reia-llc/6a/933/928','_system','location=no');" href="#" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Linkedin</a></li>
+			 <!--li><a class="excecute" data-excecute="managerSearch" href="javascript:void(0);">NewsLetters</a></li-->
+			</ul>
+	</div><!-- /panel -->
+ 
+</div>
+
+
+<button id="video_full" style="display:none" >full</button>
+
+<script type="text/javascript">
+//$('#pageHtml').attr('src','http://aoreiamobile.aoreia.com/forgotPassword.php');
+
+//$('#homeHtml').attr('src','http://aoreiamobile.aoreia.com/homeinside.php');
+</script>
+
+<script type="text/javascript">
+	//menuClick('menu-home');
+	$(function() {
+	  setTimeout(hideSplash, 2000);
+	});
+
+	function hideSplash() {
+	  $.mobile.changePage("#inicio", "fade");
+	}
+	
+	function exitFromApp(){
+        //console.log("in button");
+        navigator.app.exitApp();
+    }
+	
+$(document).ready(function () {
+
+	/*var video = $('#webVideosHtml').contents().find('#video')
+				
+		video.addEventListener('playing', function() {
+				window.plugins.orientationchanger.lockOrientation('landscape');
+		}, false);
+			
+		
+	
+	$(document).on("content", function (e, ui) {
+        if  (ui.nextPage[0].id=='webVideosHtml'){
+            var video = $('#webVideosHtml').contents().find('#video')
+		video.addEventListener('playing', function() {                              
+			window.plugins.orientationchanger.lockOrientation('landscape');
+		}, false);
+      $("#video_full")[0].click();
+     }
+});*/
+	
+	$("#searchInicio").on("keypress", function(e){       
+	
+	if ($(".searchInicio:focus")&& (e.keyCode === 13)) {
+	  //alert("The enter key was pressed");
+			var searchI = $("input#searchInicio").val();
+			//alert(searchI);
+			$.post('http://aoreiamobile.aoreia.com/fetch_pagesGeneral.php',{'searchInicio': searchI,page:0}, function(data) {
+				if(searchI!=""){
+					//alert(searchI);
+					//alert('aqui');
+					$.mobile.changePage("#generalHtml");
+					$("#webGeneralHtml").contents().find("#results").empty();
+					$("#webGeneralHtml").contents().find("#results").append(data);
+					$("input#searchInicio").val('');
+				}else{				
+					$("#webGeneralHtml").contents().find("#results").empty();
+					$("#webGeneralHtml").contents().find("#results").append(data);
+					$("input#searchInicio").val('');
+				}
+					
+				}).fail(function(xhr, ajaxOptions, thrownError) { 
+					alert(thrownError); //alert any HTTP error
+					$(".load_more").show(); //bring back load more button
+					$('.animation_image').hide(); //hide loading image once data is received
+				});
+	   
+		}
+	
+	
+	});
+	
+	$("#searchWeekly").on("keypress", function(e){               	
+		
+		if ($(".searchWeekly:focus") && (e.keyCode === 13)) {
+			var search = $("input#searchWeekly").val();
+				//alert("The enter key was pressed");
+				//alert(search);
+		
+			$.ajax({						 
+				type: 'POST',			
+				url: 'http://aoreiamobile.aoreia.com/fetch_pages.php',
+				data: {'searchWeekly': search,page:0},   
+				//crossDomain : false , 
+				success:function(data){
+				 //alert('Works!');
+					$("#webWeeklyHtml").contents().find("#results").empty();
+					$("#webWeeklyHtml").contents().find("#results").append(data);
+					//$("#webWeeklyHtml").trigger(data);							
+				},
+				error:function(exception){
+				alert('Not work');
+									
+				}
+		    });
+		
+		/*$.post('fetch_pages.php',{'searchWeekly': search,page:0}, function(data) {
+				alert('Works!');
+				$("#webWeeklyHtml").contents().find("#results").empty();
+				$("#webWeeklyHtml").contents().find("#results").append(data);
+				
+		}).fail(function(xhr, ajaxOptions, thrownError) {
+			alert('Not Works!');
+			consola.log (thrownError);//alert any HTTP error
+			consola.log (xhr);
+			consola.log (ajaxOptions);
+			$(".load_more").show(); //bring back load more button
+			$('.animation_image').hide(); //hide loading image once data is received
+		});*/
+		
+       //e.preventDefault();
+	   
+      }
+	
+	});
+	
+	
+	$("#searchTest").on("keypress", function(e){ 
+
+	 if ($(".searchTest:focus") && (e.keyCode === 13)) {
+	   var search = $("input#searchTest").val();
+	   
+       //alert(search);
+	   $.post('http://aoreiamobile.aoreia.com/fetch_pagesTest.php',{'searchTest': search,page:0}, function(data) {
+			
+				$("#webTestimonialsHtml").contents().find("#results").empty();
+				$("#webTestimonialsHtml").contents().find("#results").append(data);
+				
+			}).fail(function(xhr, ajaxOptions, thrownError) { 
+				alert(thrownError); //alert any HTTP error
+				$(".load_more").show(); //bring back load more button
+				$('.animation_image').hide(); //hide loading image once data is received
+			});
+	   
+    }
+	});
+	
+	$("#searchFaq").on("keypress", function(e){ 	
+    if ($(".searchFaq:focus") && (e.keyCode === 13)) {
+	   var search = $("input#searchFaq").val();
+	   
+       //alert(search);
+	   $.post('http://aoreiamobile.aoreia.com/fetch_pagesFaq.php',{'searchFaq': search,page:0}, function(data) {
+			
+				$("#webFaqHtml").contents().find("#results").empty();
+				$("#webFaqHtml").contents().find("#results").append(data);
+				
+			}).fail(function(xhr, ajaxOptions, thrownError) { 
+				alert(thrownError); //alert any HTTP error
+				$(".load_more").show(); //bring back load more button
+				$('.animation_image').hide(); //hide loading image once data is received
+			});
+	   
+    }
+	});
+
+	$("#searchArt").on("keypress", function(e){ 
+	if ($(".searchArt:focus") && (e.keyCode === 13)) {
+	   var search = $("input#searchArt").val();
+	   
+       //alert(search);
+	   $.post('http://aoreiamobile.aoreia.com/fetch_pagesArt.php',{'searchArt': search,page:0}, function(data) {
+			
+				$("#webArticlesHtml").contents().find("#results").empty();
+				$("#webArticlesHtml").contents().find("#results").append(data);
+				
+			}).fail(function(xhr, ajaxOptions, thrownError) { 
+				alert(thrownError); //alert any HTTP error
+				$(".load_more").show(); //bring back load more button
+				$('.animation_image').hide(); //hide loading image once data is received
+			});
+	   
+    }
+	});
+	
+	$("#searchAudios").on("keypress", function(e){ 	
+	if ($(".searchAudios:focus") && (e.keyCode === 13)) {
+	   var search = $("input#searchAudios").val();
+	   
+       //alert(search);
+	   $.post('http://aoreiamobile.aoreia.com/fetch_pagesAudios.php',{'searchAudios': search,page:0}, function(data) {
+			
+				$("#webAudiosHtml").contents().find("#results").empty();
+				$("#webAudiosHtml").contents().find("#results").append(data);
+				
+			}).fail(function(xhr, ajaxOptions, thrownError) { 
+				alert(thrownError); //alert any HTTP error
+				$(".load_more").show(); //bring back load more button
+				$('.animation_image').hide(); //hide loading image once data is received
+			});
+	   
+    }
+	});
+	
+	$("#searchVideos").on("keypress", function(e){ 	
+	if ($(".searchVideos:focus") && (e.keyCode === 13)) {
+	   var search = $("input#searchVideos").val();
+	   
+       //alert(search);
+	   $.post('http://aoreiamobile.aoreia.com/fetch_pagesVideos.php',{'searchVideos': search,page:0}, function(data) {
+			
+				$("#webVideosHtml").contents().find("#results").empty();
+				$("#webVideosHtml").contents().find("#results").append(data);
+				
+			}).fail(function(xhr, ajaxOptions, thrownError) { 
+				alert(thrownError); //alert any HTTP error
+				$(".load_more").show(); //bring back load more button
+				$('.animation_image').hide(); //hide loading image once data is received
+			});
+	   
+    }
+	});
+	
+	$("#searchFiles").on("keypress", function(e){ 
+	if ($(".searchFiles:focus") && (e.keyCode === 13)) {
+	   var search = $("input#searchFiles").val();
+	   
+       //alert(search);
+	   $.post('http://aoreiamobile.aoreia.com/fetch_pagesFiles.php',{'searchFiles': search,page:0}, function(data) {
+			
+				$("#webFilesHtml").contents().find("#results").empty();
+				$("#webFilesHtml").contents().find("#results").append(data);
+				
+			}).fail(function(xhr, ajaxOptions, thrownError) { 
+				alert(thrownError); //alert any HTTP error
+				$(".load_more").show(); //bring back load more button
+				$('.animation_image').hide(); //hide loading image once data is received
+			});
+	   
+    }
+	});
+	
+	$("#searchArt").on("keypress", function(e){ 	
+	if ($(".searchArt:focus") && (e.keyCode === 13)) {
+	   var search = $("input#searchArt").val();
+	   
+       //alert(search);
+	   $.post('http://aoreiamobile.aoreia.com/fetch_pagesArt.php',{'searchArt': search,page:0}, function(data) {
+			
+				$("#webArtHtml").contents().find("#results").empty();
+				$("#webArtHtml").contents().find("#results").append(data);
+				
+			}).fail(function(xhr, ajaxOptions, thrownError) { 
+				alert(thrownError); //alert any HTTP error
+				$(".load_more").show(); //bring back load more button
+				$('.animation_image').hide(); //hide loading image once data is received
+			});
+	   
+    }
+	});
+	
+	$("#searchRec").on("keypress", function(e){ 	
+	if ($(".searchRec:focus") && (e.keyCode === 13)) {
+	   var search = $("input#searchRec").val();
+	   
+       //alert(search);
+	   $.post('http://aoreiamobile.aoreia.com/fetch_pagesRec.php',{'searchRec': search,page:0}, function(data) {
+			
+				$("#webRecentHtml").contents().find("#results").empty();
+				$("#webRecentHtml").contents().find("#results").append(data);
+				
+			}).fail(function(xhr, ajaxOptions, thrownError) { 
+				alert(thrownError); //alert any HTTP error
+				$(".load_more").show(); //bring back load more button
+				$('.animation_image').hide(); //hide loading image once data is received
+			});
+	   
+    }
+	});
+	
+	$("#searchMeet").on("keypress", function(e){ 	
+	if ($(".searchMeet:focus") && (e.keyCode === 13)) {
+	   var search = $("input#searchMeet").val();
+	   
+       //alert(search);
+	   $.post('http://aoreiamobile.aoreia.com/fetch_pagesMeet.php',{'searchRec': search,page:0}, function(data) {
+			
+				$("#webMeetingHtml").contents().find("#results").empty();
+				$("#webMeetingHtml").contents().find("#results").append(data);
+				
+			}).fail(function(xhr, ajaxOptions, thrownError) { 
+				alert(thrownError); //alert any HTTP error
+				$(".load_more").show(); //bring back load more button
+				$('.animation_image').hide(); //hide loading image once data is received
+			});
+	   
+    }
+	});  
+	
+
+	$("#webVideosHtml,#webWeeklyHtml,#webTestimonialsHtml,#webFilesHtml,#webAudiosHtml,#webFaqHtml,#webMeetingHtml,#webArticlesHtml,#webLegalHtml,#webGlossaryHtml,#webContactsHtml,#webAboutHtml,#webRecentHtml,#webSponsorsHtml,#webGeneralHtml").height($(window).height()-$("div.ui-page-active div[data-role='header']").height()-7-43);
+		
+    $('#saveSettings').bind('click', function (e) {
+			window.parent.document.getElementById("webSettingHtml").contentWindow.saveSettingsMobile();
+			//console.debug(window.parent.document.getElementById("webSettingHtml"));
+			//console.debug("window");
+	});
+	
+	$('#saveContactUs').bind('click', function (e) {
+			window.parent.document.getElementById("webContactsHtml").contentWindow.saveSettingsMobile();
+			//console.debug(window.parent.document.getElementById("webSettingHtml"));
+			//console.debug("window");
+	});
+	
+	$('#nose').bind('click', function (e) {
+			window.parent.document.getElementById("webStoreHtml").contentWindow.storeMobile();
+			//console.debug(window.parent.document.getElementById("webSettingHtml"));
+			//console.debug("window");
+	});
+	
+	
+	
+						
+	//hide1	
+	$('#hideText').click(function(){
+		$('#searchInicio').animate({width:'toggle'},1000);
+		$(this).fadeOut();
+		$('#showText').fadeIn();
+	});
+
+	$('#showText').click(function(){
+		$('#searchInicio').animate({width:'toggle'},1000);
+		$(this).fadeOut();
+		$('#hideText').fadeIn();
+		$( '#webGeneralHtml' ).attr( 'src', function ( i, val ) { return val; });
+	});
+	//hide1	
+	$('#hide1').click(function(){
+	    $('#searchWeekly').animate({width:'toggle'},1000);
+		$(this).fadeOut();
+		$('#show1').fadeIn();
+	});
+
+	$('#show1').click(function(){
+		$('#searchWeekly').animate({width:'toggle'},1000);
+		$(this).fadeOut();
+		$('#hide1').fadeIn();
+		$( '#webWeeklyHtml' ).attr( 'src', function ( i, val ) { return val; });
+		$("input#searchWeekly").val('');
+	});
+	//hide2
+	$('#hide2').click(function(){
+		$('#searchTest').animate({width:'toggle'},1000);
+		$(this).fadeOut();
+		$('#show2').fadeIn();
+	});
+
+	$('#show2').click(function(){
+		$('#searchTest').animate({width:'toggle'},1000);
+		$(this).fadeOut();
+		$('#hide2').fadeIn();
+		$( '#webTestimonialsHtml' ).attr( 'src', function ( i, val ) { return val; });
+		$("input#searchTest").val('');
+	});
+	//hide3
+	$('#hide3').click(function(){
+		$('#searchFaq').animate({width:'toggle'},1000);
+		$(this).fadeOut();
+		$('#show3').fadeIn();
+	});
+
+	$('#show3').click(function(){
+		$('#searchFaq').animate({width:'toggle'},1000);
+		$(this).fadeOut();
+		$('#hide3').fadeIn();
+		$( '#webFaqHtml' ).attr( 'src', function ( i, val ) { return val; });
+		$("input#searchFaq").val('');
+	});
+	//hide4
+	$('#hide4').click(function(){
+		$('#searchArt').animate({width:'toggle'},1000);
+		$(this).fadeOut();
+		$('#show4').fadeIn();
+	});
+
+	$('#show4').click(function(){
+		$('#searchArt').animate({width:'toggle'},1000);
+		$(this).fadeOut();
+		$('#hide4').fadeIn();
+		$( '#webArticlesHtml' ).attr( 'src', function ( i, val ) { return val; });
+		$("input#searchArt").val('');
+	});
+	//hide5
+	$('#hide5').click(function(){
+		$('#searchAudios').animate({width:'toggle'},1000);
+		$(this).fadeOut();
+		$('#show5').fadeIn();
+	});
+
+	$('#show5').click(function(){
+		$('#searchAudios').animate({width:'toggle'},1000);
+		$(this).fadeOut();
+		$('#hide5').fadeIn();
+		$( '#webAudiosHtml' ).attr( 'src', function ( i, val ) { return val; });
+		$("input#searchAudios").val('');
+	});
+	//hide6
+	$('#hide6').click(function(){
+		$('#searchVideos').animate({width:'toggle'},1000);
+		$(this).fadeOut();
+		$('#show6').fadeIn();
+	});
+
+	$('#show6').click(function(){
+		$('#searchVideos').animate({width:'toggle'},1000);
+		$(this).fadeOut();
+		$('#hide6').fadeIn();
+		$( '#webVideosHtml' ).attr( 'src', function ( i, val ) { return val; });
+		$("input#searchVideos").val('');
+	});
+	//hide7
+	$('#hide7').click(function(){
+		$('#searchFiles').animate({width:'toggle'},1000);
+		$(this).fadeOut();
+		$('#show7').fadeIn();
+	});
+
+	$('#show7').click(function(){
+		$('#searchFiles').animate({width:'toggle'},1000);
+		$(this).fadeOut();
+		$('#hide7').fadeIn();
+		$( '#webFilesHtml' ).attr( 'src', function ( i, val ) { return val; });
+		$("input#searchFiles").val('');
+	});
+	//hide8
+	$('#hide8').click(function(){
+		$('#searchRec').animate({width:'toggle'},1000);
+		$(this).fadeOut();
+		$('#show8').fadeIn();
+	});
+
+	$('#show8').click(function(){
+		$('#searchRec').animate({width:'toggle'},1000);
+		$(this).fadeOut();
+		$('#hide8').fadeIn();
+		$( '#webRecentHtml' ).attr( 'src', function ( i, val ) { return val; });
+		$("input#searchRec").val('');
+	});
+	//hide9
+	$('#hide9').click(function(){
+		$('#searchMeet').animate({width:'toggle'},1000);
+		$(this).fadeOut();
+		$('#show9').fadeIn();
+	});
+
+	$('#show9').click(function(){
+		$('#searchMeet').animate({width:'toggle'},1000);
+		$(this).fadeOut();
+		$('#hide9').fadeIn();
+		$( '#webMeetingHtml' ).attr( 'src', function ( i, val ) { return val; });
+		$("input#searchMeet").val('');
+	});
+	
+				
+    $('#sendButton').bind('click', function (e) {
+		
+		var posY = e.clientY+e.currentTarget.clientHeight;	
+        		
+				if  ($('#loginEmail').val().length == ""){
+					   $("#both p")
+						.text("Empty Fields")
+						.parent().popup( "open", { y: posY } );
+					   return false;
+					   
+				}
+				
+				if  ($('#loginPass').val().length == ""){
+					   $("#both p")
+						.text("Empty Password")
+						.parent().popup( "open", { y: posY } );
+					   return false;
+					   
+				}
+					  
+									
+				$.ajax({
+					type: 'POST',
+				    dataType: "json",
+					url: 'http://aoreiamobile.aoreia.com/resources/php/loginverify.php',
+					data: 'loginEmail=' + $('#loginEmail').val() + '&loginPass=' + $('#loginPass').val(),
+					success:function(msj){
+						//alert(msj.success+"|"+msj.error);							
+						if ( msj.success ){
+							
+							//otro ajax
+							$.ajax({
+								type: 'POST',
+								dataType: "json",
+								url: 'http://aoreiamobile.aoreia.com/properties_validacion.php',
+								data: 'loginEmail=' + $('#loginEmail').val() + '&loginPass=' + $('#loginPass').val(),
+								success:function(msj){
+									//alert(msj.success+"|"+msj.error);							
+									if ( msj.success ){
+									
+									$.mobile.changePage("#home")
+									//alert('aqui');
+									
+									}
+									else{
+										
+									}
+								},
+								error:function(){
+									
+								}
+							});	
+						
+						
+						}
+						else{
+							
+						}
+					},
+					error:function(){
+						
+					}
+				});		
+							
+		});//$('#sendButton').bind('click', function ()
+		
+		$('#sendButton1').bind('click', function (e) {
+		
+		var posY = e.clientY+e.currentTarget.clientHeight;	
+        		
+				if  ($('#fullName').val().length == ""){
+					   $("#both p")
+						.text("Empty Fields")
+						.parent().popup( "open", { y: posY } );
+					   return false;
+					   
+				}
+				
+				if  ($('#userName').val().length == ""){
+					   $("#both p")
+						.text("Empty Fields")
+						.parent().popup( "open", { y: posY } );
+					   return false;
+					   
+				}
+				
+				if  ($('#registerEmail').val().length == ""){
+					   $("#both p")
+						.text("Empty Fields")
+						.parent().popup( "open", { y: posY } );
+					   return false;
+					   
+				}
+				
+				if  ($('#registerPass').val().length == ""){
+					   $("#both p")
+						.text("Empty Password")
+						.parent().popup( "open", { y: posY } );
+					   return false;
+					   
+				}
+					  
+									
+				$.ajax({
+					type: 'POST',
+				    dataType: "json",
+					url: 'http://aoreiamobile.aoreia.com/resources/php/loginverify.php',
+					data: 'loginEmail=' + $('#loginEmail').val() + '&loginPass=' + $('#loginPass').val(),
+					success:function(msj){
+						//alert(msj.success+"|"+msj.error);							
+						if ( msj.success ){
+							
+						$.mobile.changePage("#home")	
+												
+						}
+						else{
+							
+						}
+					},
+					error:function(){
+						
+					}
+				});		
+							
+		});//$('#sendButton').bind('click', function ()
+		
+       
+});
+
+
+	
+</script>
+	
+<!--script>
+ 
+$('#formulario').submit(function() { 
+	
+	 
+	// recolecta los valores que inserto el usuario
+	var datosUsuario = $("#emailaddress").val()
+	var datosPassword = $("#password").val()
+	
+  	archivoValidacion = "validation_data.php?jsoncallback=?"
+	//archivoValidacion = "http://revolucion.mobi/ejemplos/phonegap/envioFormulario/validacion_de_datos.php?jsoncallback=?"
+ 
+	$.getJSON( archivoValidacion, { usuario:datosUsuario ,password:datosPassword})
+	.done(function(respuestaServer) {
+		
+		alert(respuestaServer.mensaje + "\nGenerado en: " + respuestaServer.hora + "\n" +respuestaServer.generador)
+		
+		if(respuestaServer.validacion == "ok"){
+		  
+		 	/// si la validacion es correcta, muestra la pantalla "home"
+			$.mobile.changePage("#home")
+		  
+		}else{
+		  
+		  /// ejecutar una conducta cuando la validacion falla
+		}
+  
+	})
+	return false;
+})
+	
+</script-->
+<script type="text/javascript" src="cordova.js"></script>
+
+<script type="text/javascript">
+    document.addEventListener("deviceReady",_onDeviceReady, false);
+   
+    document.addEventListener("backbutton", function(){
+		if(video_play){
+			//window.plugins.orientationchanger.resetOrientation();
+			video_play=false;
+		}else{
+		 if (WURFL.form_factor != "Tablet") {
+			history.back();
+		 }else{
+			history.back();
+		 }
+		}
+
+		if(activePage=='inicio'){
+			navigator.app.exitApp();//se sale de la aplicacion
+		}
+			
+   }, false);
+</script>
+
+</body>
+</html>
+
