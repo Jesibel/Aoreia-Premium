@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns   = "http://www.w3.org/ns/widgets"
  xmlns:gap   = "http://phonegap.com/ns/1.0"
- id          = "com.aoreia.test"
- versionCode = "12" 
+ id          = "com.aoreia.aoreiaclub"
+ versionCode = "1" 
  version     = "1.0.0" >
 
   <!-- versionCode is optional and Android only -->
 
-  <name>Aoreia Mobile</name>
+  <name>Aoreia Premium</name>
 
   <description>
   An example for phonegap build docs. 
   </description> 
 
-  <author href="http://aoreiamobile.aoreia.com" email="jesibelaranguren@gmail.com">
+  <author href="http://aoreiaclub.aoreia.com" email="jesibelaranguren@gmail.com">
   Hardeep Shoker 
   </author>
   
@@ -91,8 +91,8 @@
     </array>
   </gap:config-file>
 
-  <access origin="http://aoreiamobile.aoreia.com" />       
-  <access origin="http://aoreiamobile.aoreia.com" subdomains="true" /> 
+  <access origin="http://aoreiaclub.aoreia.com" />       
+  <access origin="http://aoreiaclub.aoreia.com" subdomains="true" /> 
   <access origin="*"/>
   
   
