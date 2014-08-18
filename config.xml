@@ -50,7 +50,7 @@
   <preference name="stay-in-webview" value="true" /> 
  
   <!-- Define app icon for each platform. -->
-  <icon src="resources/image/icon.png" />
+   <icon src="resources/image/logo-Aoreia-120.png"/>
   <icon src="resources/image/logo36.png"   gap:platform="android"    gap:density="ldpi" />
   <icon src="resources/image/logo48.png"   gap:platform="android"    gap:density="mdpi" />
   <icon src="resources/image/logo72.png"   gap:platform="android"    gap:density="hdpi" />
