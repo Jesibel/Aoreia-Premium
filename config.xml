@@ -78,13 +78,6 @@
   <!--plugin name="InAppBillingPlugin" value="com.smartmobilesoftware.inappbilling.InAppBillingPlugin"/-->
   <gap:plugin name="com.smartmobilesoftware.inappbilling" version="3.0.2" />
  
- <!-- only ios -->
-  <gap:config-file platform="ios" parent="UISupportedInterfaceOrientations~ipad" overwrite="true">
-    <array>
-      <string>UIInterfaceOrientationLandscapeLeft</string>
-      <string>UIInterfaceOrientationLandscapeRight</string>
-    </array>
-  </gap:config-file>
 
   <access origin="http://aoreiaclub.aoreia.com" />       
   <access origin="http://aoreiaclub.aoreia.com" subdomains="true" /> 
