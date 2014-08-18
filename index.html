@@ -28,7 +28,12 @@
 		
 		function _onDeviceReady (){	
 			
+			$.ajaxSetup({cache: false,}); //evitar cache
 			
+			//setinterval("detectInternet()",2500);
+			//var id = setInterval("detectInternet()",1000);
+			//setTimeout("clearInterval("+id+")",15000);
+			detectInternet();
 			
 			$(document).on("pagecontainerhide", function (e, ui) {
 				if(video_play){
@@ -80,6 +85,60 @@
 				}
 			}, false);
         }
+		
+	function showConfirm() {
+			navigator.notification.confirm(
+				'There was an error connecting to the Internet. Would you like to retry?.',  // message
+				onConfirm,         // callback to invoke with index of button pressed
+				'No Internet connection',            // title
+				'No,Yes'        // buttonLabels
+			);
+		}
+		
+		function onConfirm(button) {
+			//console.log('You selected button ' + button);
+			if(button == 1){
+				//pressed "cancel"
+				console.log("User has cancelled");
+				//exitFromApp    
+				navigator.app.exitApp();
+			}
+			else if(button == 2){
+				//pressed "delete"
+				console.log("connecting");
+				detectInternet();
+			}
+		}
+		
+		
+		function detectInternet(){
+		
+			var url='http://aoreiaclub.aoreia.com';
+	
+			$.ajax({
+				url: url,
+				type: 'GET',
+				cache : false,
+				contentType: "application/json;charset=utf-8",
+				success: function (data) {
+					// Yor success logic 
+						//alert('success bien');
+						
+						},
+				error: function (request) {
+					 //alert(request.responseText);
+					 //alert(request.status);
+					if(request.status==0)
+					{
+						//alert("Please connect to the internet");
+						showConfirm();
+						
+						
+					}
+				}
+			});
+			
+		}	
 		
 	function noscreen() {
 		navigator.splashscreen.hide();
