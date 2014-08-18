@@ -37,17 +37,7 @@
   <preference name="SplashScreen" value="splash" />
   <preference name="SplashScreenDelay" value="10000" /> <!-- ios: if set to false, the spinner won't appear on the splash screen during app loading -->
   
-  <!-- only ios -->
-  <preference name="target-device"              value="universal" />      <!-- ios: possible values handset, tablet, or universal -->
-  <preference name="prerendered-icon"           value="true" />           <!-- ios: if icon is prerendered, iOS will not apply it's gloss to the app's icon on the user's home screen -->
-  <preference name="detect-data-types"          value="true" />           <!-- ios: controls whether data types (such as phone no. and dates) are automatically turned into links by the system -->
-  <preference name="exit-on-suspend"            value="false" />          <!-- ios: if set to true, app will terminate when home button is pressed -->
-  <preference name="AutoHideSplashScreen"       value="false" />
-  <preference name="FadeSplashScreen"           value="true" />
-  <preference name="FadeSplashScreenDuration"   value="0.5" />
-  <preference name="ShowSplashScreenSpinner"    value="false" />
   
-  <preference name="stay-in-webview" value="true" /> 
  
   <!-- Define app icon for each platform. -->
    <icon src="resources/image/logo-Aoreia-120.png"/>
