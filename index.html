@@ -2171,6 +2171,8 @@
 	
 $(document).ready(function () {
 
+	$.ajaxSetup({cache: false,}); //evitar cache
+
 	/*var video = $('#webVideosHtml').contents().find('#video')
 				
 		video.addEventListener('playing', function() {
