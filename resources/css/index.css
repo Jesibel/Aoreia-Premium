@@ -1,0 +1,224 @@
+.weekly {
+	 background-image: url('../../resources/img/new3/m-G-weekly_insight-36.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 
+	 }
+	 
+.weekly:hover{
+	 background-image: url('../../resources/img/new2/a-weekly_insight.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.testi {
+	 background-image: url('../../resources/img/new3/m-G-testimonials-36.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 padding: 0.7em 1em;
+	 }
+	 
+.testi:hover{
+	 background-image: url('../../resources/img/new2/a-testimonials.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.store {
+	 background-image: url('../../resources/img/new3/m-G-store-36.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.store:hover{
+	 background-image: url('../../resources/img/new2/a-store.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.faq {
+	 background-image: url('../../resources/img/new3/m-G-faq-36.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.faq:hover{
+	 background-image: url('../../resources/img/new2/a-faq.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.audio {
+	 background-image: url('../../resources/img/new3/m-G-audio_books-36.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.audio:hover{
+	 background-image: url('../../resources/img/new2/a-audio_books.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }	 
+	
+	
+.sponsors {
+	 background-image: url('../../resources/img/new3/m-G-sponsor-36.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.sponsors:hover{
+	 background-image: url('../../resources/img/new2/a-sponsor-96.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }	 
+
+.article {
+	 background-image: url('../../resources/img/new3/m-G-article-36.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.article:hover{
+	 background-image: url('../../resources/img/new2/a-article.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.sponsors {
+	 background-image: url('../../resources/img/new3/m-G-sponsor-36.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.sponsors:hover{
+	 background-image: url('../../resources/img/new2/a-sponsor-96.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }	 
+
+.video {
+	 background-image: url('../../resources/img/new3/m-G-videos-36.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.video:hover{
+	 background-image: url('../../resources/img/new2/a-videos.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+
+.meeting {
+	 background-image: url('../../resources/img/new3/m-G-meeting_archives-36.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.meeting:hover{
+	 background-image: url('../../resources/img/new2/a-meeting_archives.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+.recent {
+	 background-image: url('../../resources/img/new3/m-G-recent_deal-36.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.recent:hover{
+	 background-image: url('../../resources/img/new2/a-recent_deal.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+.files {
+	 background-image: url('../../resources/img/new3/m-G-files-36.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.files:hover{
+	 background-image: url('../../resources/img/new2/a-files.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+.legal {
+	 background-image: url('../../resources/img/new3/m-G-legal-36.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.legal:hover{
+	 background-image: url('../../resources/img/new2/a-legal.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }	 
+.contact {
+	 background-image: url('../../resources/img/new3/m-G-contact-us-36.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.contact:hover{
+	 background-image: url('../../resources/img/new2/a-contact-us.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.about {
+	 background-image: url('../../resources/img/new3/m-G-about_us-36.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.about:hover{
+	 background-image: url('../../resources/img/new2/a-about_us.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.glossary {
+	 background-image: url('../../resources/img/new3/m-G-glosary-36.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.glossary:hover{
+	 background-image: url('../../resources/img/new2/a-glosary.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+.facebook {
+	 background-image: url('../../resources/img/new3/m-G-facebook-36.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.facebook:hover{
+	 background-image: url('../../resources/img/new2/a-facebook.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+.twitter {
+	 background-image: url('../../resources/img/new3/m-G-twitter-36.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.twitter:hover{
+	 background-image: url('../../resources/img/new2/a-twitter.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+.linkedin {
+	 background-image: url('../../resources/img/new3/m-G-linkedin-36.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
+.linkedin:hover{
+	 background-image: url('../../resources/img/new2/a-linkedin.png');
+	 background-repeat:no-repeat;
+	 background-size: 40px 40px;
+	 }
+	 
