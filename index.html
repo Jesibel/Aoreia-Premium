@@ -2159,7 +2159,7 @@
 	
 $(document).ready(function () {
 
-	//$.ajaxSetup({cache: false,}); //evitar cache
+	$.ajaxSetup({cache: false,}); //evitar cache
 
 	/*var video = $('#webVideosHtml').contents().find('#video')
 				
@@ -2428,7 +2428,7 @@ $(document).ready(function () {
 	});  
 	
 
-	$("#webVideosHtml,#webWeeklyHtml,#webTestimonialsHtml,#webFilesHtml,#webAudiosHtml,#webFaqHtml,#webMeetingHtml,#webArticlesHtml,#webLegalHtml,#webGlossaryHtml,#webContactsHtml,#webAboutHtml,#webRecentHtml,#webSponsorsHtml,#webGeneralHtml").height($(window).height()-$("div.ui-page-active div[data-role='header']").height()-7-43);
+	$("#webVideosHtml,#webWeeklyHtml,#webTestimonialsHtml,#webFilesHtml,#webAudiosHtml,#webFaqHtml,#webMeetingHtml,#webArticlesHtml,#webLegalHtml,#webGlossaryHtml,#webContactsHtml,#webAboutHtml,#webRecentHtml,#webSponsorsHtml,#webGeneralHtml").height($(window).height()-$("div.ui-page-active div[data-role='header']").height()-7-23);
 		
     $('#saveSettings').bind('click', function (e) {
 			window.parent.document.getElementById("webSettingHtml").contentWindow.saveSettingsMobile();
