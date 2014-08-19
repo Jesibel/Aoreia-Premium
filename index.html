@@ -30,9 +30,6 @@
 			
 			$.ajaxSetup({cache: false,}); //evitar cache
 			
-			//setinterval("detectInternet()",2500);
-			//var id = setInterval("detectInternet()",1000);
-			//setTimeout("clearInterval("+id+")",15000);
 			detectInternet();
 			
 			$(document).on("pagecontainerhide", function (e, ui) {
@@ -113,7 +110,7 @@
 		
 		function detectInternet(){
 		
-			var url='http://aoreiamobile.aoreia.com';
+			var url='http://aoreiaclub.aoreia.com';
 	
 			$.ajax({
 				url: url,
