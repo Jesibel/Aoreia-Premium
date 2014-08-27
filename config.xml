@@ -10,11 +10,11 @@
   <name>Aoreia Premium</name>
 
   <description>
-  An example for phonegap build docs. 
+  Aoreia Mobile for Android. 
   </description> 
 
   <author href="http://aoreiaclub.aoreia.com" email="jesibelaranguren@gmail.com">
-  Hardeep Shoker 
+  Jesibel Aranguren
   </author>
   
    <feature name="http://api.phonegap.com/1.0/network"/>
